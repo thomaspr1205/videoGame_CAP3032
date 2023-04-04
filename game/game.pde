@@ -2,22 +2,24 @@ Menu gameMenu;
 void setup() {
   size(1000, 800);
   PImage menuImg = loadImage("data/menuBackground.jpg");
-  gameMenu = new Menu(menuImg, "game title");
+  gameMenu = new Menu(menuImg, "Dino Dash: Escape from Extinction");
 }
 
 void draw() {
-  gameMenu.display();
+  gameMenu.display(); 
+  //gameMenu.display2();
 }
 
 void mouseClicked() {
   // navigation should happen here
-  if (gameMenu.easy.rectOver) {
-    print("easy button clicked\n");
+  if (gameMenu.play.rectOver) {
+    print("play button clicked\n");
+    
   }
-  if (gameMenu.medium.rectOver) {
-    print("medium button clicked\n");
+  if (gameMenu.charSel.rectOver) {
+    print("characters button clicked\n");
   }
-  if (gameMenu.hard.rectOver) {
-    print("hard button clicked\n");
+  if (gameMenu.controls.rectOver) {
+    print("controls button clicked\n");
   }
 }

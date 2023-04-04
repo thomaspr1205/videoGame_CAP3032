@@ -12,12 +12,13 @@ class Button {
 
   Button(String input, int sizeX, int sizeY, int posX, int posY) {
     content = input;
-    rectColor = color(255,100,100);
+    rectColor = color(255,100,100, 200);
     rectSizeX = sizeX;
     rectSizeY = sizeY;
     rectHighlight = color(255,200,100);
-    rectX = posX-rectSizeX-10;
-    rectY = posY-rectSizeY/2;
+    rectX = posX;
+    rectY = posY;
+    rectMode(CENTER);
   }
 
   void display() {
@@ -29,15 +30,16 @@ class Button {
       fill(rectColor);
     }
     noStroke();
-    rect(rectX, rectY, rectSizeX, rectSizeY);
+    rect(rectX, rectY, rectSizeX, rectSizeY, 25);
 
     if (rectOver) {
       fill(rectColor);
     } else {
       fill(rectHighlight);
     }
-    textSize(45);
-    text(content, rectX + 10, rectY + 50);
+    fill(255);
+    textSize(50);
+    text(content, rectX, rectY + 15);
   }
 
   void update() {
@@ -48,8 +50,8 @@ class Button {
     }
   }
   boolean overRect(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width &&
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= x - width/2 && mouseX <= x + width/2 &&
+      mouseY >= y - height/2 && mouseY <= y + height/2) {
       return true;
     } else {
       return false;
