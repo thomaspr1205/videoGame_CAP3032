@@ -75,8 +75,8 @@ public void draw() {
     else if(levelTesting){
       background(233, 123, 100);
       levelTest.display();
-      moveCharacter(player1);
-      moveCharacter(player2);  
+      moveCharacter(player1, levelTest);
+      moveCharacter(player2, levelTest);  
     }
   }
   world.update(elapsedTime);
@@ -177,28 +177,18 @@ void loadSprites(){
 void createCharacters(){
   x = 100;
   y = 600;
-  player1  = new Character(this, x+50, y, red);
+  player1  = new Character(this, (float)x+50, (float)y, 50f, 50.0f, 10f, red);
   player1.setKeys(37,38,39); //arrows
                 
-  player2  = new Character(this, x-50, y, blue);
+  player2  = new Character(this, (float)x-50, (float)y, 50f, 50.0f, 10f, blue);
   player2.setKeys(65,87,68);// wasd
 }
 
-void moveCharacter(Character dino){
+void moveCharacter(Character dino, Level level){
+  dino.move(level.map.bs);
+  dino.display();
   Vector2D target = new Vector2D();
-  dino.gravity -= 1;
-  if(dino.jumping && dino.gravity > 0){
-    target.set(dino.x, dino.y);
-    dino.y += 1;
-  }
-  else if(dino.gravity == 0){
-    dino.jumping = false;
-    dino.gravity = 100;
-  }else{
-    target.set(dino.x, height);
-    dino.adjustDino = true;
-  }
-
+  target.set(dino.x, dino.y);
   dino.AP().arriveOn(target).wallAvoidOn();
   float speed = (float) dino.speed();
   float maxSpeed = (float) dino.maxSpeed();    
@@ -233,4 +223,58 @@ void createLevels(){
 }
 
 
+// Character player;
+// World world;
+// StopWatch sw;
+// Domain wd;
+// Building[] bs;
+// BuildingPic bpic;
 
+// void setup() {
+//   size(1000, 700);
+//   world = new World(width, height);
+//   sw = new StopWatch();
+//   wd = new Domain(0, 0, 1000, 700);
+  
+//   // Create player character
+// player = new Character(100, 100, 50, 50, 10f, height - 50, 10);
+  
+//   // Create some buildings
+//   PApplet parent = this;
+//   bs = Building.makeFromXML(this, "maps/mapTest.xml");
+//   bpic = new BuildingPic(parent, color(200), color(0), 2);
+
+//   for (int i = 0; i < bs.length; i++) {
+//     bs[i].renderer(bpic);
+//     world.add(bs[i]);
+//   }
+//   sw.reset();
+// }
+
+// void draw() {
+
+//   double elapsedTime = sw.getElapsedTime();
+
+//   background(255);
+  
+//   // Update player position and display
+//   player.move(bs);
+//   player.display();
+    
+//   world.update(elapsedTime);
+//   world.draw(elapsedTime);
+// }
+
+// void keyPressed() {
+//   print(key);
+//   if (key == 'w' && player.isOnGround()) {
+//     // Jump if player is on the ground
+//     player.jump();
+//   }
+//   if(key == 'd'){
+//     player.dx += 1;
+//   }
+//   if(key == 'a'){
+//     player.dx -= 1;
+//   }
+// }
