@@ -109,6 +109,9 @@ void mouseClicked() {
   else if (gameMenu.controls.rectOver) {
     print("controls button clicked\n");
   }
+  else if (gameMenu.credits.rectOver) {
+    print("credits button clicked\n");
+  }
 
   //============= Character Selection ==============
   else if(gameMenu.red.rectOver){
