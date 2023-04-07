@@ -1,6 +1,6 @@
 class Menu{
     PImage backgroundImg;
-    Button home, play, charSel, controls, lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8;
+    Button home, play, charSel, controls, credits, lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8;
     Button red, blue, green, yellow;
     String title;
     String character1, character2;
@@ -11,9 +11,10 @@ class Menu{
         title = name;
         // Button("label", xSize, ySize, xPos, yPos, radius) we can also include the color parameters here
         home = new Button("Home", 150, 50, 155, 100, 15, 30);
-        play = new Button("Play", 300, 80, 500, 400, 25, 50);
-        charSel = new Button("Characters", 300, 80, 500, 500, 25, 50);
-        controls = new Button("Controls", 300, 80, 500, 600, 25, 50);
+        play = new Button("Play", 300, 80, 500, 330, 25, 50);
+        charSel = new Button("Characters", 300, 80, 500, 420, 25, 50);
+        controls = new Button("Controls", 300, 80, 500, 510, 25, 50);
+        credits = new Button("Credits", 300, 80, 500, 600, 25, 50);
         lvl1 = new Button("1", 150, 150, 155, 255, 25, 50);
         lvl2 = new Button("2", 150, 150, 385, 255, 25, 50);
         lvl3 = new Button("3", 150, 150, 615, 255, 25, 50);
@@ -32,9 +33,6 @@ class Menu{
         greenIdle = new Animation("dinoGRI", 4);
         blueIdle = new Animation("dinoBRI", 4);
         yellowIdle = new Animation("dinoYRI", 4);
-        
-        
-   
     }
 
     void display(){
@@ -42,9 +40,10 @@ class Menu{
         fill(0);
         textAlign(CENTER);
         textSize(150);
-        text(title.substring(0,10), 500, 250);
+        text(title.substring(0,10), 500, 180);
         textSize(50);
-        text(title.substring(11), 500, 320);
+        text(title.substring(11), 500, 250);
+        credits.display();
         play.display();
         charSel.display();
         controls.display();
