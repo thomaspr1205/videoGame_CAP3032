@@ -43,10 +43,10 @@ class Menu{
         text(title.substring(0,10), 500, 180);
         textSize(50);
         text(title.substring(11), 500, 250);
-        credits.display();
         play.display();
         charSel.display();
         controls.display();
+        credits.display();
     }
     
     void displayLevels() {
@@ -73,7 +73,6 @@ class Menu{
         image(loadImage("data/dinoBR1.png"),385 - 32, 545 - 34);
         green.display();
         image(loadImage("data/dinoGR1.png"),615 - 32, 545 - 34);
-        //greenIdle.display(590,265,5);
         yellow.display();
         image(loadImage("data/dinoYR1.png"),845 - 32, 545 - 34);
 
@@ -84,16 +83,16 @@ class Menu{
         fill(255);
         text("Player 1 ",270,220);
         if(character1 == "data/dinoRRI1.png") {
-          redIdle.display(270 -34, 310 - 25, 5);
+          redIdle.display(270 - 64, 310 - 40, 5);
         }
         else if(character1 == "data/dinoBRI1.png") {
-          blueIdle.display(270 - 34, 310 - 25, 5);
+          blueIdle.display(270 - 64, 310 - 40, 5);
         }
         else if(character1 == "data/dinoGRI1.png") {
-          greenIdle.display(270 - 34, 310 - 25, 5);
+          greenIdle.display(270 - 64, 310 - 40, 5);
         }
         else if(character1 == "data/dinoYRI1.png") {
-          yellowIdle.display(270 - 34, 310 - 25, 5);
+          yellowIdle.display(270 - 64, 310 - 40, 5);
         }
         
 
@@ -103,18 +102,28 @@ class Menu{
         text("Player 2 ",730,220);
         //image(loadImage(character2),620,310);
         if(character2 == "data/dinoRRI1.png") {
-          redIdle.display(730 - 32, 310 - 25, 5);
+          redIdle.display(730 - 64, 310 - 40, 5);
         }
         else if(character2 == "data/dinoBRI1.png") {
-          blueIdle.display(730 - 32, 310 - 25, 5);
+          blueIdle.display(730 - 64, 310 - 40, 5);
         }
         else if(character2 == "data/dinoGRI1.png") {
-          greenIdle.display(730 - 32, 310 -25, 5);
+          greenIdle.display(730 - 64, 310 - 40, 5);
         }
         else if(character2 == "data/dinoYRI1.png") {
-          yellowIdle.display(730 - 32, 310 - 25, 5);
+          yellowIdle.display(730 - 64, 310 - 40, 5);
         }
-
     }
-
+    
+    void displayControls() {
+        image(backgroundImg,0,0);
+        textAlign(CENTER);
+        home.display();
+    }
+    
+    void displayCredits() {
+        image(backgroundImg,0,0);
+        textAlign(CENTER);
+        home.display();
+    }
 }

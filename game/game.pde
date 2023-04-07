@@ -9,7 +9,7 @@ import game2dai.utils.*;
 import game2dai.graph.*;
 
 Menu gameMenu;
-boolean menu, levels, characters, levelTesting;
+boolean menu, levels, characters, controls, credits, levelTesting;
 
 World world;
 StopWatch sw;
@@ -72,6 +72,12 @@ public void draw() {
     else if(characters){
       gameMenu.displayCharacters(); 
     }
+    else if(controls) {
+      gameMenu.displayControls();
+    }
+    else if(credits) {
+      gameMenu.displayCredits();
+    }
     else if(levelTesting){
       background(233, 123, 100);
       levelTest.display();
@@ -108,9 +114,15 @@ void mouseClicked() {
   }
   else if (gameMenu.controls.rectOver) {
     print("controls button clicked\n");
+    controls = true;
+    menu = false;
+    gameMenu.controls.rectOver = false;
   }
   else if (gameMenu.credits.rectOver) {
     print("credits button clicked\n");
+    credits = true;
+    menu = false;
+    gameMenu.controls.rectOver = false;
   }
 
   //============= Character Selection ==============
