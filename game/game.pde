@@ -231,6 +231,3 @@ void createLevels(){
   // level2 = new Level(this,2);
   // level3 = new Level(this,3);
 }
-
-
-

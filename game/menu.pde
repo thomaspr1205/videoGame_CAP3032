@@ -4,6 +4,7 @@ class Menu{
     Button red, blue, green, yellow;
     String title;
     String character1, character2;
+    Animation redIdle, blueIdle, greenIdle, yellowIdle;
     
     Menu(PImage image, String name){
         backgroundImg = image;
@@ -22,11 +23,17 @@ class Menu{
         lvl7 = new Button("7", 150, 150, 615, 485, 25, 50);
         lvl8 = new Button("8", 150, 150, 845, 485, 25, 50);  
 
-        red = new Button("", 150, 150, 155, 285, 25, 50);
-        blue = new Button("", 150, 150, 385, 285 ,25, 50);
-        green = new Button("", 150, 150, 615, 285 ,25, 50);
-        yellow = new Button("", 150, 150, 845, 285 ,25, 50);
-
+        red = new Button("", 150, 150, 155, 545, 25, 50);
+        blue = new Button("", 150, 150, 385, 545 ,25, 50);
+        green = new Button("", 150, 150, 615, 545 ,25, 50);
+        yellow = new Button("", 150, 150, 845, 545 ,25, 50);
+        
+        redIdle = new Animation("dinoRRI", 4);
+        greenIdle = new Animation("dinoGRI", 4);
+        blueIdle = new Animation("dinoBRI", 4);
+        yellowIdle = new Animation("dinoYRI", 4);
+        
+        
    
     }
 
@@ -62,20 +69,52 @@ class Menu{
         textAlign(CENTER);
         home.display();
         red.display();
-        image(loadImage("data/dinoRR1.png"),130,265);
+        image(loadImage("data/dinoRR1.png"),155 - 32, 545 - 34);
         blue.display();
-        image(loadImage("data/dinoBR1.png"),360,265);
+        image(loadImage("data/dinoBR1.png"),385 - 32, 545 - 34);
         green.display();
-        image(loadImage("data/dinoGR1.png"),590,265);
+        image(loadImage("data/dinoGR1.png"),615 - 32, 545 - 34);
+        //greenIdle.display(590,265,5);
         yellow.display();
-        image(loadImage("data/dinoYR1.png"),820,265);
+        image(loadImage("data/dinoYR1.png"),845 - 32, 545 - 34);
 
-        text("Player 1 ",400,600);
-        image(loadImage(character1),350,610);
+        
+        //image(loadImage(character1),350,610);
+        fill(255, 100, 100, 200);
+        rect(270,300,380,265,25);
+        fill(255);
+        text("Player 1 ",270,220);
+        if(character1 == "data/dinoRRI1.png") {
+          redIdle.display(270 -34, 310 - 25, 5);
+        }
+        else if(character1 == "data/dinoBRI1.png") {
+          blueIdle.display(270 - 34, 310 - 25, 5);
+        }
+        else if(character1 == "data/dinoGRI1.png") {
+          greenIdle.display(270 - 34, 310 - 25, 5);
+        }
+        else if(character1 == "data/dinoYRI1.png") {
+          yellowIdle.display(270 - 34, 310 - 25, 5);
+        }
+        
 
-       
-        text("Player 2 ",650,600);
-        image(loadImage(character2),620,610);
+        fill(255, 100, 100, 200);
+        rect(730,300,380,265,25);
+        fill(255);
+        text("Player 2 ",730,220);
+        //image(loadImage(character2),620,310);
+        if(character2 == "data/dinoRRI1.png") {
+          redIdle.display(730 - 32, 310 - 25, 5);
+        }
+        else if(character2 == "data/dinoBRI1.png") {
+          blueIdle.display(730 - 32, 310 - 25, 5);
+        }
+        else if(character2 == "data/dinoGRI1.png") {
+          greenIdle.display(730 - 32, 310 -25, 5);
+        }
+        else if(character2 == "data/dinoYRI1.png") {
+          yellowIdle.display(730 - 32, 310 - 25, 5);
+        }
 
     }
 
