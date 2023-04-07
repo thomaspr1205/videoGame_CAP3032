@@ -8,24 +8,24 @@ class Menu{
     Menu(PImage image, String name){
         backgroundImg = image;
         title = name;
-        // Button("label", xSize, ySize, xPos, yPos) we can also include the color parameters here
-        home = new Button("Home",150,50,100,100);
-        play = new Button("Play",300,80,500,400);
-        charSel = new Button("Characters",300,80,500,500);
-        controls = new Button("Controls",300,80,500,600);
-        lvl1 = new Button("1", 150, 150, 155, 285);
-        lvl2 = new Button("2", 150, 150, 385, 285);
-        lvl3 = new Button("3", 150, 150, 615, 285);
-        lvl4 = new Button("4", 150, 150, 845, 285);
-        lvl5 = new Button("5", 150, 150, 155, 515);
-        lvl6 = new Button("6", 150, 150, 385, 515);
-        lvl7 = new Button("7", 150, 150, 615, 515);
-        lvl8 = new Button("8", 150, 150, 845, 515);  
+        // Button("label", xSize, ySize, xPos, yPos, radius) we can also include the color parameters here
+        home = new Button("Home", 150, 50, 155, 100, 15, 30);
+        play = new Button("Play", 300, 80, 500, 400, 25, 50);
+        charSel = new Button("Characters", 300, 80, 500, 500, 25, 50);
+        controls = new Button("Controls", 300, 80, 500, 600, 25, 50);
+        lvl1 = new Button("1", 150, 150, 155, 255, 25, 50);
+        lvl2 = new Button("2", 150, 150, 385, 255, 25, 50);
+        lvl3 = new Button("3", 150, 150, 615, 255, 25, 50);
+        lvl4 = new Button("4", 150, 150, 845, 255, 25, 50);
+        lvl5 = new Button("5", 150, 150, 155, 485, 25, 50);
+        lvl6 = new Button("6", 150, 150, 385, 485, 25, 50);
+        lvl7 = new Button("7", 150, 150, 615, 485, 25, 50);
+        lvl8 = new Button("8", 150, 150, 845, 485, 25, 50);  
 
-        red = new Button("", 150, 150, 155, 285);
-        blue = new Button("", 150, 150, 385, 285);
-        green = new Button("", 150, 150, 615, 285);
-        yellow = new Button("", 150, 150, 845, 285);
+        red = new Button("", 150, 150, 155, 285, 25, 50);
+        blue = new Button("", 150, 150, 385, 285 ,25, 50);
+        green = new Button("", 150, 150, 615, 285 ,25, 50);
+        yellow = new Button("", 150, 150, 845, 285 ,25, 50);
 
    
     }

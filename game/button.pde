@@ -6,11 +6,13 @@ class Button {
 
   int rectX, rectY;
   int rectSizeX, rectSizeY;
+  int rectRadius;
+  int rectTextSz;
   color rectColor, rectHighlight;
   boolean rectOver = false;
   String content;
 
-  Button(String input, int sizeX, int sizeY, int posX, int posY) {
+  Button(String input, int sizeX, int sizeY, int posX, int posY, int radius, int textSz) {
     content = input;
     rectColor = color(255,100,100, 200);
     rectSizeX = sizeX;
@@ -18,6 +20,8 @@ class Button {
     rectHighlight = color(255,200,100);
     rectX = posX;
     rectY = posY;
+    rectRadius = radius;
+    rectTextSz = textSz;
     rectMode(CENTER);
   }
 
@@ -30,7 +34,7 @@ class Button {
       fill(rectColor);
     }
     noStroke();
-    rect(rectX, rectY, rectSizeX, rectSizeY, 25);
+    rect(rectX, rectY, rectSizeX, rectSizeY, rectRadius);
 
     if (rectOver) {
       fill(rectColor);
@@ -38,8 +42,8 @@ class Button {
       fill(rectHighlight);
     }
     fill(255);
-    textSize(50);
-    text(content, rectX, rectY + 15);
+    textSize(rectTextSz);
+    text(content, rectX, rectY +(rectTextSz*2)/6); // Font is around a 30 to 50 ratio pixels to font size
   }
 
   void update() {
