@@ -94,14 +94,22 @@ public class Character extends Vehicle {
         view.showHints(Hints.HINT_WHISKERS | Hints.HINT_COLLISION | Hints.HINT_HEADING | Hints.HINT_VELOCITY);
         renderer(view);
       }
-      dx -= 0.15;
+      if(x < 0){
+        dx = 0;
+      }else{
+        dx -= 0.15;
+      }
     } if (keyCode == right) {
       if(isOnGround){
         view = new BitmapPic(parent, sprite.rightView, 6, 1);
         view.showHints(Hints.HINT_WHISKERS | Hints.HINT_COLLISION | Hints.HINT_HEADING | Hints.HINT_VELOCITY);
         renderer(view);
         }
-      dx += 0.15;
+      if(dx > width){
+        dx = width;
+      }else{
+        dx += 0.15;
+      }
     }
     prevKey = keyCode;
   }
@@ -219,7 +227,7 @@ public class Character extends Vehicle {
     } else if (y < maxY.y && y + h/2 > maxY.y) {
       // Collision from bottom
       dy = 0;
-      y = (float)maxY.y;
+      y = (float)minY.y;
     } else if (x + w > minX.x && x < minX.x + w/2) {
       // Collision from left
       dx = 0;

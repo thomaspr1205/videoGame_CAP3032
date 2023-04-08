@@ -114,7 +114,12 @@ class Menu{
         else if(character2 == "data/dinoYRI1.png") {
           yellowIdle.display(730 - 32, 310 - 25, 5);
         }
+    }
 
+    void displayControls(){
+      image(backgroundImg,0,0);
+      image(loadImage("data/instructions.png"),200,140);
+      home.display();
     }
 
 }

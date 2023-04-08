@@ -7,40 +7,28 @@
 	<contour>
 		<point x = "0"   y = "650" />
 		<point x = "0"   y = "700" />
-		<point x = "500" y = "700" />
-		<point x = "500" y = "650" />
-		<point x = "200" y = "650" />
+		<point x = "1000" y = "700" />
+		<point x = "1000" y = "650" />
 	</contour>
 </building>
 
 <building name="floor2">
 	<pos x="0" y = "0" />
 	<contour>
-		<point x = "600"   y = "650" />
-		<point x = "600"   y = "700" />
-		<point x = "1000" y = "700" />
-		<point x = "1000" y = "650" />
-		<point x = "800" y = "650" />
+		<point x = "500"   y = "490" />
+		<point x = "500"   y = "510" />
+		<point x = "650" y = "510" />
+		<point x = "650" y = "490" />
 	</contour>
 </building>
 
 <building name="floor3">
 	<pos x="0" y = "0" />
 	<contour>
-		<point x = "200"   y = "490" />
-		<point x = "200"   y = "500" />
-		<point x = "300" y = "500" />
-		<point x = "300" y = "490" />
-	</contour>
-</building>
-
-<building name="floor3">
-	<pos x="0" y = "0" />
-	<contour>
-		<point x = "700"   y = "590" />
+		<point x = "700"   y = "550" />
 		<point x = "700"   y = "600" />
 		<point x = "800" y = "600" />
-		<point x = "800" y = "590" />
+		<point x = "800" y = "550" />
 	</contour>
 </building>
 
