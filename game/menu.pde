@@ -113,9 +113,7 @@ class Menu{
         else if(character2 == "data/dinoYRI1.png") {
           yellowIdle.display(730 - 64, 310 - 40, 5);
         }
-    }
-
-    
+    }   
     void displayControls() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
