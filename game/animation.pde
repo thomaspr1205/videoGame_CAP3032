@@ -20,7 +20,7 @@ class Animation {
       prevFrame = 0;
     }
     frame = prevFrame / lag;
-    image(images[frame], xPos, yPos);
+    image(images[frame], xPos, yPos, 128, 136); // add the two end numbers to parameters to scale image
     
   }
   
