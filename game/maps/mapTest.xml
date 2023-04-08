@@ -17,8 +17,8 @@
 	<contour>
 		<point x = "500"   y = "490" />
 		<point x = "500"   y = "510" />
-		<point x = "650" y = "510" />
-		<point x = "650" y = "490" />
+		<point x = "600" y = "510" />
+		<point x = "600" y = "490" />
 	</contour>
 </building>
 

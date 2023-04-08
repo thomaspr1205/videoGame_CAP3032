@@ -100,6 +100,7 @@ void mouseClicked() {
     characters = false;
     menu = true;
     controls = false;
+    credits = false;
     gameMenu.home.rectOver = false;
   }
   else if (gameMenu.play.rectOver) {
