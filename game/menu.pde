@@ -119,6 +119,9 @@ class Menu{
         image(backgroundImg,0,0);
         textAlign(CENTER);
         home.display();
+        image(loadImage("data/upArrow.png"),80,160,100,100);
+        image(loadImage("data/leftArrow.png"),80,280,100,100);
+        image(loadImage("data/rightArrow.png"),80,400,100,100);
     }
     
     void displayCredits() {
