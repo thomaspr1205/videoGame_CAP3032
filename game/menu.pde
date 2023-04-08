@@ -118,9 +118,15 @@ class Menu{
         image(backgroundImg,0,0);
         textAlign(CENTER);
         home.display();
-        image(loadImage("data/upArrow.png"),80,160,100,100);
-        image(loadImage("data/leftArrow.png"),80,280,100,100);
-        image(loadImage("data/rightArrow.png"),80,400,100,100);
+        fill(255,100,100, 150);
+        rect(500,400,840,415, 25);
+        image(loadImage("data/upArrow.png"),120,230,100,100);
+        image(loadImage("data/leftArrow.png"),120,350,100,100);
+        image(loadImage("data/rightArrow.png"),120,470,100,100);
+        image(loadImage("data/WKey.png"),480,230,100,100);
+        image(loadImage("data/AKey.png"),480,350,100,100);
+        image(loadImage("data/DKey.png"),480,470,100,100);
+        
     }
     
     void displayCredits() {
