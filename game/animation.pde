@@ -14,13 +14,13 @@ class Animation {
     }
   }
 
-  void display(float xPos, float yPos, int lag) {
+  void display(float xPos, float yPos, int lag, int newX, int newY) {
     prevFrame+=1;
     if(prevFrame == imageCount * lag) {
       prevFrame = 0;
     }
     frame = prevFrame / lag;
-    image(images[frame], xPos, yPos, 128, 136); // add the two end numbers to parameters to scale image
+    image(images[frame], xPos, yPos, newX, newY); // add the two end numbers to parameters to scale image
     
   }
   
