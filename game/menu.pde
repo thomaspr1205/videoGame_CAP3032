@@ -2,6 +2,7 @@ class Menu{
     PImage backgroundImg;
     Button home, play, charSel, controls, credits, lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8;
     Button red, blue, green, yellow;
+    Button P1Button, P2Button;
     String title;
     String character1, character2;
     Animation redIdle, blueIdle, greenIdle, yellowIdle;
@@ -28,6 +29,9 @@ class Menu{
         blue = new Button("", 150, 150, 385, 545 ,25, 50);
         green = new Button("", 150, 150, 615, 545 ,25, 50);
         yellow = new Button("", 150, 150, 845, 545 ,25, 50);
+        
+        P1Button = new Button("", 380, 265, 270, 300, 25, 0);
+        P2Button = new Button("", 380, 265, 730, 300, 25, 0);
         
         redIdle = new Animation("dinoRRI", 4);
         greenIdle = new Animation("dinoGRI", 4);
@@ -79,8 +83,16 @@ class Menu{
         
         //image(loadImage(character1),350,610);
         //stroke(255);
-        fill(255, 100, 100, 200);
-        rect(270,300,380,265,25);
+        //fill(255, 100, 100, 200);
+        //rect(270,300,380,265,25);
+        
+        P1Button.display();
+        if(P1 == true){
+          stroke(255);
+          fill(255,0);
+          rect(270,300,380,265,25);
+        }
+        noStroke();
         fill(255);
         text("Player 1 ",270,220);
         if(character1 == "data/dinoRRI1.png") {
@@ -97,8 +109,15 @@ class Menu{
         }
         
 
-        fill(255, 100, 100, 200);
-        rect(730,300,380,265,25);
+        //fill(255, 100, 100, 200);
+        //rect(730,300,380,265,25);
+        P2Button.display();
+        if(P2 == true){
+          stroke(255);
+          fill(255,0);
+          rect(730,300,380,265,25);
+        }
+        noStroke();
         fill(255);
         text("Player 2 ",730,220);
         //image(loadImage(character2),620,310);

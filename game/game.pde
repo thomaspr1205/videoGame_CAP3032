@@ -10,7 +10,7 @@ import game2dai.graph.*;
 
 Menu gameMenu;
 
-boolean menu, levels, characters, controls, credits, levelTesting;
+boolean menu, levels, characters, controls, credits, levelTesting, P1, P2;
 
 World world;
 StopWatch sw;
@@ -25,7 +25,7 @@ double x;
 double y;
 int prevKey;
 Level levelTest;
-int player = 1;
+int player = 0;
 
 void setup() {
   size(1000, 700);
@@ -129,6 +129,16 @@ void mouseClicked() {
   }
 
   //============= Character Selection ==============
+  else if(gameMenu.P1Button.rectOver) {
+    P1 = true;
+    P2 = false;
+    player = 1;
+  }
+  else if(gameMenu.P2Button.rectOver) {
+    P1 = false;
+    P2 = true;
+    player = 2;
+  }
   else if(gameMenu.red.rectOver){
     println("red character selected - player " + player);
     characterSelection(red);
@@ -223,12 +233,13 @@ void characterSelection(CharacterSprite sprite){
   if(player == 1){
       gameMenu.character1 = sprite.jumpRightView;
       player1.setSprite(sprite);
-      player = 2;
-    }else{
+      //player = 2;
+  }
+  else if (player == 2){
       gameMenu.character2 = sprite.jumpRightView;
       player2.setSprite(sprite);
-      player = 1;
-    }
+      //player = 1;
+  }
 }
 
 
