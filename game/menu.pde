@@ -78,6 +78,7 @@ class Menu{
 
         
         //image(loadImage(character1),350,610);
+        //stroke(255);
         fill(255, 100, 100, 200);
         rect(270,300,380,265,25);
         fill(255);

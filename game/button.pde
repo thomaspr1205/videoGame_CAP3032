@@ -29,11 +29,14 @@ class Button {
     update();
 
     if (rectOver) {
+      stroke(255);
+      strokeWeight(5);
       fill(rectHighlight);
     } else {
+      noStroke();
       fill(rectColor);
     }
-    noStroke();
+    //noStroke();
     rect(rectX, rectY, rectSizeX, rectSizeY, rectRadius);
 
     if (rectOver) {
@@ -41,6 +44,7 @@ class Button {
     } else {
       fill(rectHighlight);
     }
+    noStroke();
     fill(255);
     textSize(rectTextSz);
     text(content, rectX, rectY +(rectTextSz*2)/6); // Font is around a 30 to 50 ratio pixels to font size
