@@ -123,9 +123,18 @@ class Menu{
         image(loadImage("data/upArrow.png"),120,230,100,100);
         image(loadImage("data/leftArrow.png"),120,350,100,100);
         image(loadImage("data/rightArrow.png"),120,470,100,100);
-        image(loadImage("data/WKey.png"),480,230,100,100);
-        image(loadImage("data/AKey.png"),480,350,100,100);
-        image(loadImage("data/DKey.png"),480,470,100,100);
+        image(loadImage("data/WKey.png"),530,230,100,100);
+        image(loadImage("data/AKey.png"),530,350,100,100);
+        image(loadImage("data/DKey.png"),530,470,100,100);
+        fill(255);
+        textAlign(LEFT);
+        text("Player 1 Jump", 260, 280);
+        text("Player 1 Left", 260, 400);
+        text("Player 1 Right", 260, 520);
+        text("Player 2 Jump", 670, 280);
+        text("Player 2 Left", 670, 400);
+        text("Player 2 Right", 670, 520);
+        textAlign(CENTER);
         
     }
     
