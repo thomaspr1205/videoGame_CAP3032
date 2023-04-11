@@ -82,6 +82,7 @@ public void draw() {
     else if(levelTesting){
       background(233, 123, 100);
       levelTest.display();
+      levelTest.createAsteroid();
       moveCharacter(player1, levelTest);
       moveCharacter(player2, levelTest);  
     }
