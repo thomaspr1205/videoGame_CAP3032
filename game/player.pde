@@ -118,6 +118,7 @@ class Player {
   
   void render(float px, float py) {
     //background(64);
+    rectMode(CORNER);
     strokeWeight(3);
     stroke(0);
     line(100, 300, 300, 300);
@@ -126,6 +127,7 @@ class Player {
     rect(px-10, py-20, 20, 20);
     circle(px, py, 5);
     image(currentSprite, px-15, py-25,40,40);
+    rectMode(CENTER);
   }
 }
 // ======== Thomass Code ==============
