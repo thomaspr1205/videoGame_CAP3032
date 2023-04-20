@@ -10,7 +10,7 @@ class Menu{
     Menu(PImage image, String name){
         backgroundImg = image;
         title = name;
-        // Button("label", xSize, ySize, xPos, yPos, radius) we can also include the color parameters here
+        // Button("label", xSize, ySize, xPos, yPos, radius, textSize) we can also include the color parameters here
         home = new Button("Home", 150, 50, 155, 100, 15, 30);
         play = new Button("Play", 300, 80, 500, 330, 25, 50);
         charSel = new Button("Characters", 300, 80, 500, 420, 25, 50);
@@ -80,12 +80,7 @@ class Menu{
         yellow.display();
         image(loadImage("data/dinoYR1.png"),845 - 32, 545 - 34);
 
-        
-        //image(loadImage(character1),350,610);
-        //stroke(255);
-        //fill(255, 100, 100, 200);
-        //rect(270,300,380,265,25);
-        
+
         P1Button.display();
         if(P1 == true){
           stroke(255);
@@ -108,9 +103,7 @@ class Menu{
           yellowIdle.display(270 - 64, 310 - 40, 5, 128, 136);
         }
         
-
-        //fill(255, 100, 100, 200);
-        //rect(730,300,380,265,25);
+        
         P2Button.display();
         if(P2 == true){
           stroke(255);
@@ -162,5 +155,19 @@ class Menu{
         image(backgroundImg,0,0);
         textAlign(CENTER);
         home.display();
+        fill(255,100,100, 150);
+        rect(500,400,840,415, 25);
+        fill(255);
+        text("CREATED BY:", 500,230);
+        textSize(20);
+        text("AARON SONG & THOMAS PENA", 500, 260);
+        textSize(30);
+        text("MUSIC BY:",500,300);
+        textSize(20);
+        text("ABSTRACTION @ http://www.abstractionmusic.com/", 500, 330);
+        textSize(30);
+        text("CHARACTER ART BY:",500,370);
+        textSize(20);
+        text("ARKS @ arks.digital", 500, 400);
     }
 }

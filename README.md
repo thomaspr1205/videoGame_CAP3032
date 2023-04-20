@@ -18,6 +18,7 @@ Final Project for CAP3032
 ### Level
 ### Map
 ### Obstacles:
+ - Asteroid (https://foozlecc.itch.io/void-environment-pack)
  - Gravity -1 & 2
  - Spikes - 1 & 2
  - Levers/fans - 2
@@ -28,3 +29,4 @@ Final Project for CAP3032
 
 # Libraries:
 - http://www.lagers.org.uk/ai4g/pguides/pg01-start.html
+- http://processingjs.nihongoresources.com/test/PjsGameEngine/docs/tutorial/mario.html

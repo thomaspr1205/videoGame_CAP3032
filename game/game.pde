@@ -1,3 +1,4 @@
+
 Menu gameMenu;
 
 boolean menu, levels, characters, controls, credits, levelTesting, P1, P2;
@@ -20,6 +21,9 @@ boolean loadlvl1 = false;
 boolean jumping1 = false, jumping2 = false;
 boolean grounded1 = false, grounded2 = false;
 
+// Sound
+SoundFile file;
+
 void setup() {
   size(1000, 700);
 
@@ -27,6 +31,11 @@ void setup() {
   PImage menuImg = loadImage("data/menuBackground.jpg");
   gameMenu = new Menu(menuImg, "Dino Dash: Escape from Extinction");
   menu = true;
+  
+  // Sound
+  file = new SoundFile(this, "data/Abstraction - Three Red Hearts - Box Jump.wav");
+  file.amp(0.2);
+  file.loop();
 
   // Load Charcter Sprites
   loadSprites();
@@ -97,6 +106,9 @@ void mouseClicked() {
     menu = true;
     controls = false;
     credits = false;
+    player = 0;
+    P1 = false;
+    P2 = false;
     gameMenu.home.rectOver = false;
   }
   else if (gameMenu.play.rectOver) {
