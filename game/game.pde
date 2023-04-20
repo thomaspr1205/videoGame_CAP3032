@@ -1,45 +1,31 @@
-import game2dai.entities.*;
-import game2dai.entityshapes.ps.*;
-import game2dai.maths.*;
-import game2dai.*;
-import game2dai.entityshapes.*;
-import game2dai.fsm.*;
-import game2dai.steering.*;
-import game2dai.utils.*;
-import game2dai.graph.*;
-
-import processing.sound.*;
-
 
 Menu gameMenu;
 
 boolean menu, levels, characters, controls, credits, levelTesting, P1, P2;
 
-World world;
-StopWatch sw;
-Domain wd;
-
-Character player1, player2;
+Player player1, player2;
 CharacterSprite blue, green, red, yellow;
 
-// Vector2D target = new Vector2D();
-BitmapPic view;
-double x;
-double y;
-int prevKey;
-Level levelTest;
+Level lvl1;
+float px = 200;
+float py = 300;
+float vx = 0;
+float vy = 0;
+float ax = 0;
+float ay = 0;
 int player = 0;
+
+boolean[] keys = {false, false, false, false, false, false};
+boolean moving1 = false, moving2 = false;
+boolean loadlvl1 = false;
+boolean jumping1 = false, jumping2 = false;
+boolean grounded1 = false, grounded2 = false;
 
 // Sound
 SoundFile file;
 
 void setup() {
   size(1000, 700);
-
-  // Library setup
-  world = new World(width, height);
-  sw = new StopWatch();
-  wd = new Domain(0, 0, 1000, 700);
 
   // Menu setup
   PImage menuImg = loadImage("data/menuBackground.jpg");
@@ -63,15 +49,10 @@ void setup() {
 
   // Charcters setup
   createCharacters();
-  player1.worldDomain(wd, SBF.REBOUND);
-  player2.worldDomain(wd, SBF.REBOUND);
 
-
-  sw.reset();
 }
 
 public void draw() {
-  double elapsedTime = sw.getElapsedTime();
 
   // Menu
   if(menu){
@@ -91,15 +72,27 @@ public void draw() {
       gameMenu.displayCredits();
     }
     else if(levelTesting){
-      background(233, 123, 100);
-      levelTest.display();
-      levelTest.createAsteroid();
-      moveCharacter(player1, levelTest);
-      moveCharacter(player2, levelTest);  
+      if(loadlvl1 == false) {
+        print("loading map 1");
+        lvl1.loadLevel();
+        save("lvl1.png");
+        loadlvl1 = true;
+        player1.level = lvl1;
+        player2.level = lvl1;
+      }
+      image(loadImage("lvl1.png"),0,0);
+      
+      grounded1 = player1.simulate(keys[0], keys[1], moving1);
+      grounded2 = player2.simulate(keys[3], keys[4], moving2);
+
+      if(grounded1) {
+        jumping1 = false;
+      }
+      if(grounded2) {
+        jumping2 = false;
+      } 
     }
   }
-  world.update(elapsedTime);
-  world.draw(elapsedTime);
 }
 
 // ===== I/O controllers =======
@@ -182,143 +175,167 @@ void mouseClicked() {
     levelTesting = true;
     menu = false;
     levels = false;
-    world.add(player1);
-    world.add(player2);
   }
 }
 
-void keyPressed() {
-  player1.handleInput(keyCode);
-  player2.handleInput(keyCode);
+void keyPressed(){
+  if( keyCode == LEFT ){
+    keys[0] = true;
+    player1.sprite.currentSpriteIndex = (player1.sprite.currentSpriteIndex - 1 + player1.sprite.leftView.length) % player1.sprite.leftView.length;
+    player1.currentSprite = loadImage(player1.sprite.leftView[player1.sprite.currentSpriteIndex]);
+  }
+  if( keyCode == RIGHT ){
+    keys[1] = true;
+    player1.sprite.currentSpriteIndex = (player1.sprite.currentSpriteIndex + 1) % player1.sprite.rightView.length;
+    player1.currentSprite = loadImage(player1.sprite.rightView[player1.sprite.currentSpriteIndex]);
+  }
+  if( keyCode == UP ){
+    keys[2] = true;    
+    if(!jumping1) {
+      player1.jump();
+      jumping1 = true;
+    }
+  }
+  if(keyCode == LEFT || keyCode == RIGHT || keyCode == LEFT) {
+    moving1 = true;
+  }
+  if( keyCode == 'A' ){
+    keys[3] = true;
+    player2.sprite.currentSpriteIndex = (player2.sprite.currentSpriteIndex - 1 + player2.sprite.leftView.length) % player2.sprite.leftView.length;
+    player2.currentSprite = loadImage(player2.sprite.leftView[player2.sprite.currentSpriteIndex]);
+  }
+  if( keyCode == 'D' ){
+    keys[4] = true;
+    player2.sprite.currentSpriteIndex = (player2.sprite.currentSpriteIndex + 1) % player2.sprite.rightView.length;
+    player2.currentSprite = loadImage(player2.sprite.rightView[player2.sprite.currentSpriteIndex]);
+  }
+  if( keyCode == 'W' ){
+    keys[5] = true;
+    if(!jumping2) {
+      player2.jump();
+      jumping2 = true;
+    }
+  }
+  if(keyCode == 'A' || keyCode == 'D' || keyCode == 'W') {
+    moving2 = true;
+  }
+}
+
+void keyReleased(){
+  if( keyCode == LEFT ){
+    keys[0] = false;
+  }
+  if( keyCode == RIGHT ){
+    keys[1] = false;
+  }
+  if(keys[0] == false && keys[1] == false) {
+    moving1 = false;
+  }
+  if( keyCode == 'A' ){
+    keys[3] = false;
+  }
+  if( keyCode == 'D' ){
+    keys[4] = false;
+  }
+  if(keys[3] == false && keys[4] == false) {
+    moving2 = false;
+  }
 }
 
 // ======= Characters ============
 
 void loadSprites(){
-  red = new CharacterSprite("data/dinoRLeft.png",
-                           "data/dinoRRight.png",
-                           "data/dinoRLI1.png",
-                           "data/dinoRRI1.png"
-                            );
-  blue = new CharacterSprite("data/dinoBLeft.png",
-                           "data/dinoBRight.png",
-                           "data/dinoBLI1.png",
-                           "data/dinoBRI1.png"
-                            );
-  yellow = new CharacterSprite("data/dinoYLeft.png",
-                           "data/dinoYRight.png",
-                           "data/dinoYLI1.png",
-                           "data/dinoYRI1.png"
-                            );
-  green = new CharacterSprite("data/dinoGLeft.png",
-                           "data/dinoGRight.png",
-                           "data/dinoGLI1.png",
-                           "data/dinoGRI1.png"
+
+ red = new CharacterSprite(new String[]{"data/dinoRL1.png",
+                                        "data/dinoRL2.png",
+                                        "data/dinoRL3.png",
+                                        "data/dinoRL4.png",
+                                        "data/dinoRL5.png",
+                                        "data/dinoRL6.png"},
+                          new String[]{"data/dinoRR1.png",
+                                        "data/dinoRR2.png",
+                                        "data/dinoRR3.png",
+                                        "data/dinoRR4.png",
+                                        "data/dinoRR5.png",
+                                        "data/dinoRR6.png"},
+                          "data/dinoRLI1.png",
+                          "data/dinoRRI1.png"
+                          );
+
+   blue = new CharacterSprite(new String[]{"data/dinoBL1.png",
+                                        "data/dinoBL2.png",
+                                        "data/dinoBL3.png",
+                                        "data/dinoBL4.png",
+                                        "data/dinoBL5.png",
+                                        "data/dinoBL6.png"},
+                          new String[]{"data/dinoBR1.png",
+                                        "data/dinoBR2.png",
+                                        "data/dinoBR3.png",
+                                        "data/dinoBR4.png",
+                                        "data/dinoBR5.png",
+                                        "data/dinoBR6.png"},
+                          "data/dinoBLI1.png",
+                          "data/dinoBRI1.png"
+                          );
+
+   yellow = new CharacterSprite(new String[]{"data/dinoYL1.png",
+                                        "data/dinoYL2.png",
+                                        "data/dinoYL3.png",
+                                        "data/dinoYL4.png",
+                                        "data/dinoYL5.png",
+                                        "data/dinoYL6.png"},
+                          new String[]{"data/dinoYR1.png",
+                                        "data/dinoYR2.png",
+                                        "data/dinoYR3.png",
+                                        "data/dinoYR4.png",
+                                        "data/dinoYR5.png",
+                                        "data/dinoYR6.png"},
+                          "data/dinoYLI1.png",
+                          "data/dinoYRI1.png"
+                          );
+
+  green = new CharacterSprite(new String[]{"data/dinoGL1.png",
+                                          "data/dinoGL2.png",
+                                          "data/dinoGL3.png",
+                                          "data/dinoGL4.png",
+                                          "data/dinoGL5.png",
+                                          "data/dinoGL6.png"},
+                            new String[]{"data/dinoGR1.png",
+                                          "data/dinoGR2.png",
+                                          "data/dinoGR3.png",
+                                          "data/dinoGR4.png",
+                                          "data/dinoGR5.png",
+                                          "data/dinoGR6.png"},
+                            "data/dinoGLI1.png",
+                            "data/dinoGRI1.png"
                             );
 }
 
 void createCharacters(){
-  x = 100;
-  y = 600;
-  player1  = new Character(this, (float)x+50, (float)y, 50f, 50.0f, 10f, red);
-  player1.setKeys(37,38,39); //arrows
-                
-  player2  = new Character(this, (float)x-50, (float)y, 50f, 50.0f, 10f, blue);
-  player2.setKeys(65,87,68);// wasd
-}
-
-void moveCharacter(Character dino, Level level){
-  dino.move(level.map.bs);
-  dino.display();
-  Vector2D target = new Vector2D();
-  target.set(dino.x, dino.y);
-  dino.AP().arriveOn(target).wallAvoidOn();
-  float speed = (float) dino.speed();
-  float maxSpeed = (float) dino.maxSpeed();    
-  if (speed > 1) {
-    float newInterval = map(speed, 0, maxSpeed, 0.6, 0.04);
-    dino.setAnimation(newInterval, 1);
-  }
-  else {
-      dino.pauseAnimation();
-  }
+  player1 = new Player(30,680,1);
+  player2 = new Player(50,680,2);
+  player1.sprite = red;
+  player2.sprite = blue;
+  player1.currentSprite = loadImage(player1.sprite.rightView[0]);
+  player2.currentSprite = loadImage(player2.sprite.rightView[0]);
 }
 
 void characterSelection(CharacterSprite sprite){
   if(player == 1){
       gameMenu.character1 = sprite.jumpRightView;
-      player1.setSprite(sprite);
-      //player = 2;
+      player1.sprite = sprite;
+      player1.currentSprite = loadImage(sprite.rightView[0]);
   }
   else if (player == 2){
       gameMenu.character2 = sprite.jumpRightView;
-      player2.setSprite(sprite);
-      //player = 1;
+      player2.sprite = sprite;
+      player2.currentSprite = loadImage(sprite.rightView[0]);
   }
 }
 
 
 // ========= Levels ===========
 void createLevels(){
-  levelTest = new Level(this,0);
-  // level1 = new Level(this,1);
-  // level2 = new Level(this,2);
-  // level3 = new Level(this,3);
+  lvl1 = new Level(4);
+
 }
-
-
-// Character player;
-// World world;
-// StopWatch sw;
-// Domain wd;
-// Building[] bs;
-// BuildingPic bpic;
-
-// void setup() {
-//   size(1000, 700);
-//   world = new World(width, height);
-//   sw = new StopWatch();
-//   wd = new Domain(0, 0, 1000, 700);
-  
-//   // Create player character
-// player = new Character(100, 100, 50, 50, 10f, height - 50, 10);
-  
-//   // Create some buildings
-//   PApplet parent = this;
-//   bs = Building.makeFromXML(this, "maps/mapTest.xml");
-//   bpic = new BuildingPic(parent, color(200), color(0), 2);
-
-//   for (int i = 0; i < bs.length; i++) {
-//     bs[i].renderer(bpic);
-//     world.add(bs[i]);
-//   }
-//   sw.reset();
-// }
-
-// void draw() {
-
-//   double elapsedTime = sw.getElapsedTime();
-
-//   background(255);
-  
-//   // Update player position and display
-//   player.move(bs);
-//   player.display();
-    
-//   world.update(elapsedTime);
-//   world.draw(elapsedTime);
-// }
-
-// void keyPressed() {
-//   print(key);
-//   if (key == 'w' && player.isOnGround()) {
-//     // Jump if player is on the ground
-//     player.jump();
-//   }
-//   if(key == 'd'){
-//     player.dx += 1;
-//   }
-//   if(key == 'a'){
-//     player.dx -= 1;
-//   }
-// }
