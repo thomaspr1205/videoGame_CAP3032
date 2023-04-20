@@ -7,12 +7,6 @@ Player player1, player2;
 CharacterSprite blue, green, red, yellow;
 
 Level lvl1;
-float px = 200;
-float py = 300;
-float vx = 0;
-float vy = 0;
-float ax = 0;
-float ay = 0;
 int player = 0;
 
 boolean[] keys = {false, false, false, false, false, false};
@@ -75,12 +69,12 @@ public void draw() {
       if(loadlvl1 == false) {
         print("loading map 1");
         lvl1.loadLevel();
-        save("lvl1.png");
+        save("lvl1.jpg");
         loadlvl1 = true;
         player1.level = lvl1;
         player2.level = lvl1;
       }
-      image(loadImage("lvl1.png"),0,0);
+      image(loadImage("lvl1.jpg"),0,0);
       
       grounded1 = player1.simulate(keys[0], keys[1], moving1);
       grounded2 = player2.simulate(keys[3], keys[4], moving2);
@@ -312,7 +306,7 @@ void loadSprites(){
 }
 
 void createCharacters(){
-  player1 = new Player(30,680,1);
+  player1 = new Player(50,680,1);
   player2 = new Player(50,680,2);
   player1.sprite = red;
   player2.sprite = blue;
