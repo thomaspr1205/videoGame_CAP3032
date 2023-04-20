@@ -1,4 +1,6 @@
 
+import processing.sound.*;
+
 Menu gameMenu;
 
 boolean menu, levels, characters, controls, credits, levelTesting, P1, P2;
@@ -6,7 +8,7 @@ boolean menu, levels, characters, controls, credits, levelTesting, P1, P2;
 Player player1, player2;
 CharacterSprite blue, green, red, yellow;
 
-Level lvl1;
+Level lvl1,lvl2,lvl3,lvl4;
 float px = 200;
 float py = 300;
 float vx = 0;
@@ -75,12 +77,12 @@ public void draw() {
       if(loadlvl1 == false) {
         print("loading map 1");
         lvl1.loadLevel();
-        save("lvl1.png");
+        save("lvl1.jpg");
         loadlvl1 = true;
         player1.level = lvl1;
         player2.level = lvl1;
       }
-      image(loadImage("lvl1.png"),0,0);
+      image(loadImage("lvl1.jpg"),0,0);
       
       grounded1 = player1.simulate(keys[0], keys[1], moving1);
       grounded2 = player2.simulate(keys[3], keys[4], moving2);
@@ -336,6 +338,8 @@ void characterSelection(CharacterSprite sprite){
 
 // ========= Levels ===========
 void createLevels(){
-  lvl1 = new Level(4);
-
+  lvl1 = new Level(1);
+  lvl2 = new Level(2);
+  lvl3 = new Level(3);
+  lvl4 = new Level(4);
 }
