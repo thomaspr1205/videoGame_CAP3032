@@ -76,7 +76,8 @@ class Player {
         ay=0;
         grounded = true;
     }
-    if(level.map[yblkBotLoc][xblkBotLoc] == 2 && prevPy < py || level.map[yblkBotLoc2][xblkBotLoc2] == 2 && prevPy < py) {
+    if(level.map[yblkBotLoc][xblkBotLoc] >= 2 && level.map[yblkBotLoc][xblkBotLoc] < 7 && prevPy < py || 
+       level.map[yblkBotLoc2][xblkBotLoc2] >= 2 && level.map[yblkBotLoc2][xblkBotLoc2] < 7 && prevPy < py) {
         px = origPx;
         py = origPy;
     }
@@ -100,7 +101,8 @@ class Player {
         vy=0; 
         ay=0;
     }
-    if(level.map[yblkTopLoc][xblkTopLoc] == 2 && prevPy > py || level.map[yblkTopLoc2][xblkTopLoc2] == 2 && prevPy > py) {
+    if(level.map[yblkTopLoc][xblkTopLoc] >= 2 && level.map[yblkTopLoc][xblkTopLoc] < 7 && prevPy > py || 
+       level.map[yblkTopLoc2][xblkTopLoc2] >= 2 && level.map[yblkTopLoc2][xblkTopLoc2] < 7 && prevPy > py) {
         px = origPx;
         py = origPy;
     }
@@ -119,7 +121,8 @@ class Player {
         vx=0; 
         ax=0;
     }
-    if(level.map[yblkLeftLoc][xblkLeftLoc] == 2 && prevPx > px || level.map[yblkLeftLoc2][xblkLeftLoc2] == 2 && prevPx > px) {
+    if(level.map[yblkLeftLoc][xblkLeftLoc] >= 2 && level.map[yblkLeftLoc][xblkLeftLoc] < 7 && prevPx > px || 
+       level.map[yblkLeftLoc2][xblkLeftLoc2] >= 2 && level.map[yblkLeftLoc2][xblkLeftLoc2] < 7 && prevPx > px) {
         px = origPx;
         py = origPy;
     }
@@ -138,7 +141,8 @@ class Player {
         vx=0; 
         ax=0;
     }
-    if(level.map[yblkRightLoc][xblkRightLoc] == 2 && prevPx < px || level.map[yblkRightLoc2][xblkRightLoc2] == 2 && prevPx < px) {
+    if(level.map[yblkRightLoc][xblkRightLoc] >= 2 && level.map[yblkRightLoc][xblkRightLoc] < 7 && prevPx < px || 
+       level.map[yblkRightLoc2][xblkRightLoc2] >= 2 && level.map[yblkRightLoc2][xblkRightLoc2] < 7 && prevPx < px) {
         px = origPx;
         py = origPy;
     }

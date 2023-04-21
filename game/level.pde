@@ -145,14 +145,34 @@ class Level {
     background(#84DFF7);
     for(int i = 0; i < 28; i++) { // row
       for(int j = 0; j < 40; j++) { // columns
-        if(map[i][j] == 1) {
+        if(map[i][j] == 1) { // dirt
           img = loadImage("data/Textures-16.png");
           img = img.get(0,0,16,16);
           image(img, j*25, i*25, 25, 25);
         }
-        else if(map[i][j] == 2) {
+        else if(map[i][j] == 2) { // lava
           img = loadImage("data/Textures-16.png");
           img = img.get(256,144,16,16);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 3) { //^
+          img = loadImage("data/16-bit-spike-Sheet.png");
+          img = img.get(0,0,16,16);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 4) { // >
+          img = loadImage("data/16-bit-spike-Sheet.png");
+          img = img.get(16,0,16,16);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 5) { // v
+          img = loadImage("data/16-bit-spike-Sheet.png");
+          img = img.get(32,0,16,16);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 6) { // <
+          img = loadImage("data/16-bit-spike-Sheet.png");
+          img = img.get(48,0,16,16);
           image(img, j*25, i*25, 25, 25);
         }
       }
