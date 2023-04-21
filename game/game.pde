@@ -93,6 +93,9 @@ public void draw() {
       }
       image(loadImage("lvl1.jpg"),0,0);
       showCharacters(); 
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
      else if(lvl2Selected){
       if(loadlvl2 == false) {
@@ -112,6 +115,9 @@ public void draw() {
       }
       image(loadImage("lvl2.jpg"),0,0);
       showCharacters(); 
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
      else if(lvl3Selected){
       if(loadlvl3 == false) {
@@ -125,6 +131,9 @@ public void draw() {
       }
       image(loadImage("lvl3.jpg"),0,0);
       showCharacters(); 
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
      else if(lvl4Selected){
       if(loadlvl4 == false) {
@@ -138,6 +147,9 @@ public void draw() {
       }
       image(loadImage("lvl4.jpg"),0,0);
       showCharacters(); 
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
   }
   
