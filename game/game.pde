@@ -87,6 +87,10 @@ public void draw() {
       image(loadImage("lvl1.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl1);
+
+      if(player1.win == true && player2.win == true) {
+        gameMenu.displayPopUp(1,2);
+      }
     }
      else if(lvl2Selected){
       if(loadlvl2 == false) {
