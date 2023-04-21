@@ -3,7 +3,8 @@ import processing.sound.*;
 
 Menu gameMenu;
 
-boolean menu, levels, characters, controls, credits, levelTesting, P1, P2;
+boolean menu, levels, characters, controls, credits, P1, P2;
+boolean lvl1Selected,lvl2Selected,lvl3Selected,lvl4Selected;
 
 Player player1, player2;
 CharacterSprite blue, green, red, yellow;
@@ -20,11 +21,15 @@ int player = 0;
 boolean[] keys = {false, false, false, false, false, false};
 boolean moving1 = false, moving2 = false;
 boolean loadlvl1 = false;
+boolean loadlvl2 = false;
+boolean loadlvl3 = false;
+boolean loadlvl4 = false;
+
 boolean jumping1 = false, jumping2 = false;
 boolean grounded1 = false, grounded2 = false;
 
 // Sound
-SoundFile file;
+SoundFile file, levelSelection;
 
 void setup() {
   size(1000, 700);
@@ -35,9 +40,7 @@ void setup() {
   menu = true;
   
   // Sound
-  file = new SoundFile(this, "data/Abstraction - Three Red Hearts - Box Jump.wav");
-  file.amp(0.2);
-  file.loop();
+  loadSounds();
 
   // Load Charcter Sprites
   loadSprites();
@@ -73,7 +76,7 @@ public void draw() {
     else if(credits) {
       gameMenu.displayCredits();
     }
-    else if(levelTesting){
+    else if(lvl1Selected){
       if(loadlvl1 == false) {
         print("loading map 1");
         lvl1.loadLevel();
@@ -81,20 +84,64 @@ public void draw() {
         loadlvl1 = true;
         player1.level = lvl1;
         player2.level = lvl1;
+        file.play();
       }
       image(loadImage("lvl1.jpg"),0,0);
-      
-      grounded1 = player1.simulate(keys[0], keys[1], moving1);
-      grounded2 = player2.simulate(keys[3], keys[4], moving2);
-
-      if(grounded1) {
-        jumping1 = false;
+      showCharacters(); 
+    }
+     else if(lvl2Selected){
+      if(loadlvl2 == false) {
+        print("loading map 2");
+        lvl2.loadLevel();
+        save("lvl2.jpg");
+        loadlvl2 = true;
+        player1.level = lvl2;
+        player2.level = lvl2;
+        file.play();
       }
-      if(grounded2) {
-        jumping2 = false;
-      } 
+      image(loadImage("lvl2.jpg"),0,0);
+      showCharacters(); 
+    }
+     else if(lvl3Selected){
+      if(loadlvl3 == false) {
+        print("loading map 3");
+        lvl3.loadLevel();
+        save("lvl3.jpg");
+        loadlvl3 = true;
+        player1.level = lvl3;
+        player2.level = lvl3;
+        file.play();
+      }
+      image(loadImage("lvl3.jpg"),0,0);
+      showCharacters(); 
+    }
+     else if(lvl4Selected){
+      if(loadlvl4 == false) {
+        print("loading map 4");
+        lvl4.loadLevel();
+        save("lvl4.jpg");
+        loadlvl4 = true;
+        player1.level = lvl4;
+        player2.level = lvl4;
+        file.play();
+      }
+      image(loadImage("lvl4.jpg"),0,0);
+      showCharacters(); 
     }
   }
+  
+}
+
+void showCharacters(){
+  grounded1 = player1.simulate(keys[0], keys[1], moving1);
+  grounded2 = player2.simulate(keys[3], keys[4], moving2);
+
+  if(grounded1) {
+    jumping1 = false;
+  }
+  if(grounded2) {
+    jumping2 = false;
+  } 
 }
 
 // ===== I/O controllers =======
@@ -112,6 +159,10 @@ void mouseClicked() {
     P1 = false;
     P2 = false;
     gameMenu.home.rectOver = false;
+    lvl1Selected = false;
+    lvl2Selected = false;
+    lvl3Selected = false;
+    lvl4Selected = false;
   }
   else if (gameMenu.play.rectOver) {
     print("play button clicked\n");
@@ -172,9 +223,38 @@ void mouseClicked() {
 
   // ============ Level Selection ================
   else if(gameMenu.lvl1.rectOver){
+    file.pause();
+    levelSelection.play();
     println("level 1 selected");
     gameMenu.lvl1.rectOver = false;
-    levelTesting = true;
+    lvl1Selected = true;
+    menu = false;
+    levels = false;
+  }
+  else if(gameMenu.lvl2.rectOver){
+    file.pause();
+    levelSelection.play();
+    println("level 2 selected");
+    gameMenu.lvl2.rectOver = false;
+    lvl2Selected = true;
+    menu = false;
+    levels = false;
+  }
+  else if(gameMenu.lvl3.rectOver){
+    file.pause();
+    levelSelection.play();
+    println("level 3 selected");
+    gameMenu.lvl3.rectOver = false;
+    lvl3Selected = true;
+    menu = false;
+    levels = false;
+  }
+  else if(gameMenu.lvl4.rectOver){
+    file.pause();
+    levelSelection.play();
+    println("level 4 selected");
+    gameMenu.lvl4.rectOver = false;
+    lvl4Selected = true;
     menu = false;
     levels = false;
   }
@@ -220,6 +300,21 @@ void keyPressed(){
   }
   if(keyCode == 'A' || keyCode == 'D' || keyCode == 'W') {
     moving2 = true;
+  }
+  if(keyCode == 'P'){
+    levels = false;
+    characters = false;
+    menu = true;
+    controls = false;
+    credits = false;
+    player = 0;
+    P1 = false;
+    P2 = false;
+    gameMenu.home.rectOver = false;
+    lvl1Selected = false;
+    lvl2Selected = false;
+    lvl3Selected = false;
+    lvl4Selected = false;
   }
 }
 
@@ -314,8 +409,8 @@ void loadSprites(){
 }
 
 void createCharacters(){
-  player1 = new Player(30,680,1);
-  player2 = new Player(50,680,2);
+  player1 = new Player(this,50,680,1);
+  player2 = new Player(this,50,680,2);
   player1.sprite = red;
   player2.sprite = blue;
   player1.currentSprite = loadImage(player1.sprite.rightView[0]);
@@ -342,4 +437,12 @@ void createLevels(){
   lvl2 = new Level(2);
   lvl3 = new Level(3);
   lvl4 = new Level(4);
+}
+
+// =========  Sounds =========
+void loadSounds(){
+  file = new SoundFile(this, "data/Abstraction - Three Red Hearts - Box Jump.wav");
+  levelSelection = new SoundFile(this, "data/roar_level-selection.wav");
+  file.amp(0.1);
+  file.loop();
 }

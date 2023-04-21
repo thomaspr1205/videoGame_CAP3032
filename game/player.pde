@@ -11,9 +11,11 @@ class Player {
   Level level;
   CharacterSprite sprite;
   PImage currentSprite;
+  SoundFile sound;
+
 
   
-  Player(int xPos, int yPos, int playerKey) {
+  Player(PApplet parent, int xPos, int yPos, int playerKey) {
     px = xPos;
     py = yPos;
     vx = 0;
@@ -24,6 +26,7 @@ class Player {
     //xSpeed = 9;
     //gravity = 0.75;
     //grounded = false;
+    sound = new SoundFile(parent, "data/jump.wav");
   }
   
   int getPlayerKey() {
@@ -32,6 +35,8 @@ class Player {
   
   void jump() {
     vy -=10;
+    sound.amp(1.0);
+    sound.play();
   }
   
   boolean simulate(boolean left, boolean right, boolean moving) {
@@ -62,10 +67,14 @@ class Player {
         
     // Bottom collision
     int xblkBotLoc, yblkBotLoc;
-    xblkBotLoc = int(px/25);
+    xblkBotLoc = int((px - 10)/25);
     yblkBotLoc = int(py/25);  
     
-    if(level.map[yblkBotLoc][xblkBotLoc] == 1 && prevPy < py) {
+    int xblkBotLoc2, yblkBotLoc2;
+    xblkBotLoc2 = int((px + 10)/25);
+    yblkBotLoc2 = int(py/25);  
+    
+    if(level.map[yblkBotLoc][xblkBotLoc] == 1 && prevPy < py || level.map[yblkBotLoc2][xblkBotLoc2] == 1 && prevPy < py) {
         py=(yblkBotLoc)*25; 
         vy=0; 
         ay=0;
@@ -79,36 +88,45 @@ class Player {
     
     // Top collision
     int xblkTopLoc, yblkTopLoc;
-    xblkTopLoc = int(px/25);
-    yblkTopLoc = int((py-20)/25);
-    // println(xblkTopLoc + " " + yblkTopLoc);
+    xblkTopLoc = int((px - 20)/25);
+    yblkTopLoc = int((py-40)/25);
     
-    if(level.map[yblkTopLoc][xblkTopLoc] == 1 && prevPy > py) {
-        py=((yblkTopLoc + 1)*25)+20; 
+    int xblkTopLoc2, yblkTopLoc2;
+    xblkTopLoc2 = int((px + 20)/25);
+    yblkTopLoc2 = int((py-40)/25);
+    
+    if(level.map[yblkTopLoc][xblkTopLoc] == 1 && prevPy > py || level.map[yblkTopLoc2][xblkTopLoc2] == 1 && prevPy > py) {
+        py=((yblkTopLoc + 1)*25)+40; 
         vy=0; 
         ay=0;
     }
     
     // Left collision
     int xblkLeftLoc, yblkLeftLoc;
-    xblkLeftLoc = int((px-10)/25);
+    xblkLeftLoc = int((px-20)/25);
     yblkLeftLoc = int((py-10)/25);
-    // println(xblkLeftLoc + " " + yblkLeftLoc);
     
-    if(level.map[yblkLeftLoc][xblkLeftLoc] == 1 && prevPx > px) {
-        px=((xblkLeftLoc + 1)*25)+10; 
+    int xblkLeftLoc2, yblkLeftLoc2;
+    xblkLeftLoc2 = int((px-20)/25);
+    yblkLeftLoc2 = int((py-30)/25);
+    
+    if(level.map[yblkLeftLoc][xblkLeftLoc] == 1 && prevPx > px || level.map[yblkLeftLoc2][xblkLeftLoc2] == 1 && prevPx > px) {
+        px=((xblkLeftLoc + 1)*25)+20; 
         vx=0; 
         ax=0;
     }
     
     // Right collision
     int xblkRightLoc, yblkRightLoc;
-    xblkRightLoc = int((px+10)/25);
+    xblkRightLoc = int((px+20)/25);
     yblkRightLoc = int((py-10)/25);
-    // println(xblkLeftLoc + " " + yblkLeftLoc);
     
-    if(level.map[yblkRightLoc][xblkRightLoc] == 1 && prevPx < px) {
-        px=((xblkRightLoc)*25)-10; 
+    int xblkRightLoc2, yblkRightLoc2;
+    xblkRightLoc2 = int((px+20)/25);
+    yblkRightLoc2 = int((py-30)/25);
+    
+    if(level.map[yblkRightLoc][xblkRightLoc] == 1 && prevPx < px || level.map[yblkRightLoc2][xblkRightLoc2] == 1 && prevPx < px) {
+        px=((xblkRightLoc)*25)-20; 
         vx=0; 
         ax=0;
     }
@@ -118,14 +136,9 @@ class Player {
   
   void render(float px, float py) {
     //background(64);
-    strokeWeight(3);
-    stroke(0);
-    line(100, 300, 300, 300);
-    noStroke();
-    fill(0, 255, 0);
-    rect(px-10, py-20, 20, 20);
-    circle(px, py, 5);
-    image(currentSprite, px-15, py-25,40,40);
+    rectMode(CORNER);
+    image(currentSprite, px-20, py-40,40,40);
+    rectMode(CENTER);
   }
 }
 // ======== Thomass Code ==============
