@@ -7,15 +7,14 @@ class Player {
   //float xSpeed, gravity;
   //boolean grounded;
   //boolean left = false, right = false;
-  boolean moving, grounded;
+  boolean moving, grounded, portal, prevPortal;
   int keySet;
+  int savedTime, totalTime = 1000, timePassed;
   Level level;
   CharacterSprite sprite;
   PImage currentSprite;
   SoundFile sound;
 
-
-  
   Player(PApplet parent, int xPos, int yPos, int playerKey) {
     origPx = xPos;
     origPy = yPos;
@@ -60,6 +59,35 @@ class Player {
     vy+=ay;
     px+=vx;
     py+=vy;
+    
+    // Corner collision for portal
+    int xTopLeft, yTopLeft, xTopRight, yTopRight, xBotLeft, yBotLeft, xBotRight, yBotRight;
+    xTopLeft = int((px - 20)/25);
+    yTopLeft = int((py - 40)/25); 
+    xTopRight = int((px + 20)/25);
+    yTopRight = int((py - 40)/25);  
+    xBotLeft = int((px - 20)/25);
+    yBotLeft = int(py/25);  
+    xBotRight = int((px + 20)/25);
+    yBotRight = int(py/25);  
+       
+    if(level.map[yTopLeft][xTopLeft] == 7 && level.map[yTopRight][xTopRight] == 8 && level.map[yBotLeft - 1][xBotLeft] == 9 && level.map[yBotRight - 1][xBotRight] == 10) {
+      portal = true;
+      if(prevPortal == false) {
+        savedTime = millis();
+      }
+      else if(prevPortal == true) {
+        timePassed = millis() - savedTime;
+        if(timePassed > totalTime) {
+          println("inPortal");
+        }
+      }
+    }   
+    else {
+      portal = false;
+    }
+        
+    prevPortal = portal;
         
     // Bottom collision
     int xblkBotLoc, yblkBotLoc;
