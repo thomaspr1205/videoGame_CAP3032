@@ -102,10 +102,6 @@ public void draw() {
       image(loadImage("lvl2.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl2);
-
-      if(player1.win == true && player2.win == true) {
-        
-      }
     }
      else if(lvl3Selected){
       if(loadlvl3 == false) {
@@ -118,9 +114,6 @@ public void draw() {
       image(loadImage("lvl3.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl3);
-      if(player1.win == true && player2.win == true) {
-        
-      }
     }
      else if(lvl4Selected){
       if(loadlvl4 == false) {
@@ -132,9 +125,6 @@ public void draw() {
       image(loadImage("lvl4.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl4);
-      if(player1.win == true && player2.win == true) {
-        
-      }
     }
   }
   
@@ -182,7 +172,7 @@ void showCharacters(){
 
 // determine if both players have passed the level
 void checkLevelSuccess(Level level){
-  if(player1.portal && player2.portal){
+  if(player1.win && player2.win){
     level.timer.stop();
     print("Minutes: " + level.timer.minutes() + " Seconds: " + level.timer.seconds());
     backToLevels();
