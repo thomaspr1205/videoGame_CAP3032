@@ -78,21 +78,16 @@ public void draw() {
     }
     else if(lvl1Selected){
       if(loadlvl1 == false) {
-        print("loading map 1");
-        lvl1.loadLevel(0,0,16,16,#84DFF7);
+        println("loading map 1");
+        levelSetUp(50,680,70,680, lvl1,color(233,121,123),0,0,16,16);
         save("lvl1.jpg");
         loadlvl1 = true;
-        player1.level = lvl1;
-        player2.level = lvl1;
-        player1.px = 50;
-        player1.py = 680;
-        player2.px = 70;
-        player2.py = 680;
-
-        file.play();
       }
+
       image(loadImage("lvl1.jpg"),0,0);
       showCharacters(); 
+      checkLevelSuccess(lvl1);
+
       if(player1.win == true && player2.win == true) {
         gameMenu.displayPopUp(1,2);
       }
@@ -100,21 +95,14 @@ public void draw() {
      else if(lvl2Selected){
       if(loadlvl2 == false) {
         print("loading map 2");
-        lvl2.loadLevel(16,16,32,32,color(123));
+        levelSetUp(50,680,620,680, lvl2,color(123),16,16,32,32);
         save("lvl2.jpg");
-        loadlvl2 = true;
-        player1.level = lvl2;
-        player2.level = lvl2;
-
-        player1.px = 50;
-        player1.py = 680;
-        player2.px = 600;
-        player2.px = 680;
-
-        file.play();
+        loadlvl2 = true;      
       }
       image(loadImage("lvl2.jpg"),0,0);
       showCharacters(); 
+      checkLevelSuccess(lvl2);
+
       if(player1.win == true && player2.win == true) {
         
       }
@@ -122,15 +110,14 @@ public void draw() {
      else if(lvl3Selected){
       if(loadlvl3 == false) {
         print("loading map 3");
-        lvl3.loadLevel(32,32,64,64,color(233));
+        levelSetUp(50,680,70,680, lvl3,color(233,255,123),32,32,64,64);
         save("lvl3.jpg");
         loadlvl3 = true;
-        player1.level = lvl3;
-        player2.level = lvl3;
-        file.play();
       }
+     
       image(loadImage("lvl3.jpg"),0,0);
       showCharacters(); 
+      checkLevelSuccess(lvl3);
       if(player1.win == true && player2.win == true) {
         
       }
@@ -138,15 +125,13 @@ public void draw() {
      else if(lvl4Selected){
       if(loadlvl4 == false) {
         print("loading map 4");
-        lvl4.loadLevel(64,64,128,128,color(32));
+        levelSetUp(50,680,70,680, lvl4,color(123,123,123),32,32,32,32);
         save("lvl4.jpg");
         loadlvl4 = true;
-        player1.level = lvl4;
-        player2.level = lvl4;
-        file.play();
       }
       image(loadImage("lvl4.jpg"),0,0);
       showCharacters(); 
+      checkLevelSuccess(lvl4);
       if(player1.win == true && player2.win == true) {
         
       }
@@ -155,6 +140,34 @@ public void draw() {
   
 }
 
+// Loads level and position characters
+void levelSetUp(int px1,
+                int py1,
+                int px2,
+                int py2,
+                Level lvl,
+                color lvlColor,
+                int textureX1,
+                int textureY1,
+                int textureX2,
+                int textureY2){
+
+  lvl.loadLevel(textureX1,textureY1,textureX2,textureY2,lvlColor);
+
+  player1.level = lvl;
+  player2.level = lvl;
+
+  player1.px = px1;
+  player1.py = py1;
+  player2.px = px2;
+  player2.py = py2;
+
+  lvl.timer.start();
+
+  file.play();
+}
+
+// display the two characters
 void showCharacters(){
   grounded1 = player1.simulate(keys[0], keys[1], moving1);
   grounded2 = player2.simulate(keys[3], keys[4], moving2);
@@ -167,7 +180,17 @@ void showCharacters(){
   } 
 }
 
+// determine if both players have passed the level
+void checkLevelSuccess(Level level){
+  if(player1.portal && player2.portal){
+    level.timer.stop();
+    print("Minutes: " + level.timer.minutes() + " Seconds: " + level.timer.seconds());
+    backToLevels();
+  }
+}
+
 // ===== Exit Level =======
+// returns to menu screen
 void backToMenu(){
   levels = false;
   characters = false;
@@ -182,12 +205,13 @@ void backToMenu(){
   lvl2Selected = false;
   lvl3Selected = false;
   lvl4Selected = false;
-  loadlvl4 = false;
-  loadlvl4 = false;
-  loadlvl4 = false;
+  loadlvl1 = false;
+  loadlvl2 = false;
+  loadlvl3 = false;
   loadlvl4 = false;
 }
 
+// returns to levels screen
 void backToLevels(){
   levels = true;
   menu = false;
@@ -302,6 +326,7 @@ void mouseClicked() {
   }
 }
 
+// manage player movement, update sprites and exit level
 void keyPressed(){
   if( keyCode == LEFT ){
     keys[0] = true;
@@ -348,6 +373,7 @@ void keyPressed(){
   }
 }
 
+// manage player movement
 void keyReleased(){
   if( keyCode == LEFT ){
     keys[0] = false;
@@ -371,6 +397,7 @@ void keyReleased(){
 
 // ======= Characters ============
 
+// lods files needed for sprite changing
 void loadSprites(){
 
  red = new CharacterSprite(new String[]{"data/dinoRL1.png",
@@ -438,6 +465,7 @@ void loadSprites(){
                             );
 }
 
+// initialize players objects
 void createCharacters(){
   player1 = new Player(this,50,680,1);
   player2 = new Player(this,50,680,2);
@@ -447,6 +475,7 @@ void createCharacters(){
   player2.currentSprite = loadImage(player2.sprite.rightView[0]);
 }
 
+// udpate players sprites
 void characterSelection(CharacterSprite sprite){
   if(player == 1){
       gameMenu.character1 = sprite.jumpRightView;
