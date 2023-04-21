@@ -36,7 +36,6 @@ class Button {
       noStroke();
       fill(rectColor);
     }
-    //noStroke();
     rect(rectX, rectY, rectSizeX, rectSizeY, rectRadius);
 
     if (rectOver) {

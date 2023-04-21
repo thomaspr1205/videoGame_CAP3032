@@ -79,11 +79,16 @@ public void draw() {
     else if(lvl1Selected){
       if(loadlvl1 == false) {
         print("loading map 1");
-        lvl1.loadLevel();
+        lvl1.loadLevel(0,0,16,16,#84DFF7);
         save("lvl1.jpg");
         loadlvl1 = true;
         player1.level = lvl1;
         player2.level = lvl1;
+        player1.px = 50;
+        player1.py = 680;
+        player2.px = 70;
+        player2.py = 680;
+
         file.play();
       }
       image(loadImage("lvl1.jpg"),0,0);
@@ -92,11 +97,17 @@ public void draw() {
      else if(lvl2Selected){
       if(loadlvl2 == false) {
         print("loading map 2");
-        lvl2.loadLevel();
+        lvl2.loadLevel(16,16,32,32,color(123));
         save("lvl2.jpg");
         loadlvl2 = true;
         player1.level = lvl2;
         player2.level = lvl2;
+
+        player1.px = 50;
+        player1.py = 680;
+        player2.px = 600;
+        player2.px = 680;
+
         file.play();
       }
       image(loadImage("lvl2.jpg"),0,0);
@@ -105,7 +116,7 @@ public void draw() {
      else if(lvl3Selected){
       if(loadlvl3 == false) {
         print("loading map 3");
-        lvl3.loadLevel();
+        lvl3.loadLevel(32,32,64,64,color(233));
         save("lvl3.jpg");
         loadlvl3 = true;
         player1.level = lvl3;
@@ -118,7 +129,7 @@ public void draw() {
      else if(lvl4Selected){
       if(loadlvl4 == false) {
         print("loading map 4");
-        lvl4.loadLevel();
+        lvl4.loadLevel(64,64,128,128,color(32));
         save("lvl4.jpg");
         loadlvl4 = true;
         player1.level = lvl4;
@@ -144,25 +155,44 @@ void showCharacters(){
   } 
 }
 
+// ===== Exit Level =======
+void backToMenu(){
+  levels = false;
+  characters = false;
+  menu = true;
+  controls = false;
+  credits = false;
+  player = 0;
+  P1 = false;
+  P2 = false;
+  gameMenu.home.rectOver = false;
+  lvl1Selected = false;
+  lvl2Selected = false;
+  lvl3Selected = false;
+  lvl4Selected = false;
+  loadlvl4 = false;
+  loadlvl4 = false;
+  loadlvl4 = false;
+  loadlvl4 = false;
+}
+
+void backToLevels(){
+  levels = true;
+  menu = false;
+  gameMenu.play.rectOver = false;
+  lvl1Selected = false;
+  lvl2Selected = false;
+  lvl3Selected = false;
+  lvl4Selected = false;
+}
+
 // ===== I/O controllers =======
 void mouseClicked() {
 
   // ========== navigation controller =============
   if(gameMenu.home.rectOver){
     print("home button selected\n");
-    levels = false;
-    characters = false;
-    menu = true;
-    controls = false;
-    credits = false;
-    player = 0;
-    P1 = false;
-    P2 = false;
-    gameMenu.home.rectOver = false;
-    lvl1Selected = false;
-    lvl2Selected = false;
-    lvl3Selected = false;
-    lvl4Selected = false;
+    backToMenu();
   }
   else if (gameMenu.play.rectOver) {
     print("play button clicked\n");
@@ -302,19 +332,7 @@ void keyPressed(){
     moving2 = true;
   }
   if(keyCode == 'P'){
-    levels = false;
-    characters = false;
-    menu = true;
-    controls = false;
-    credits = false;
-    player = 0;
-    P1 = false;
-    P2 = false;
-    gameMenu.home.rectOver = false;
-    lvl1Selected = false;
-    lvl2Selected = false;
-    lvl3Selected = false;
-    lvl4Selected = false;
+    backToMenu();
   }
 }
 
