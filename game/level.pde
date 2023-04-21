@@ -175,6 +175,26 @@ class Level {
           img = img.get(48,0,16,16);
           image(img, j*25, i*25, 25, 25);
         }
+        else if(map[i][j] == 7) { // top left
+          img = loadImage("data/Textures-16.png");
+          img = img.get(192,160,8,8);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 8) { // top right
+          img = loadImage("data/Textures-16.png");
+          img = img.get(200,160,8,8);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 9) { // bottom left
+          img = loadImage("data/Textures-16.png");
+          img = img.get(192,168,8,8);
+          image(img, j*25, i*25, 25, 25);
+        }
+        else if(map[i][j] == 10) { // bottom right
+          img = loadImage("data/Textures-16.png");
+          img = img.get(200,168,8,8);
+          image(img, j*25, i*25, 25, 25);
+        }
       }
     }
     
