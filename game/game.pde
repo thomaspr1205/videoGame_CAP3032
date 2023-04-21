@@ -24,7 +24,7 @@ boolean loadlvl1 = false;
 boolean loadlvl2 = false;
 boolean loadlvl3 = false;
 boolean loadlvl4 = false;
-
+boolean levelCleared = false;
 boolean jumping1 = false, jumping2 = false;
 boolean grounded1 = false, grounded2 = false;
 
@@ -86,11 +86,7 @@ public void draw() {
 
       image(loadImage("lvl1.jpg"),0,0);
       showCharacters(); 
-      checkLevelSuccess(lvl1);
-
-      if(player1.win == true && player2.win == true) {
-        gameMenu.displayPopUp(1,2);
-      }
+      checkLevelSuccess(lvl1);      
     }
      else if(lvl2Selected){
       if(loadlvl2 == false) {
@@ -142,6 +138,8 @@ void levelSetUp(int px1,
                 int textureX2,
                 int textureY2){
 
+  levelCleared = false;
+
   lvl.loadLevel(textureX1,textureY1,textureX2,textureY2,lvlColor);
 
   player1.level = lvl;
@@ -174,8 +172,16 @@ void showCharacters(){
 void checkLevelSuccess(Level level){
   if(player1.win && player2.win){
     level.timer.stop();
-    print("Minutes: " + level.timer.minutes() + " Seconds: " + level.timer.seconds());
-    backToLevels();
+    player1.win = false;
+    player2.win = false;
+    player1.py = player1.origPy;
+    player1.px = player1.origPx;
+    player2.py = player2.origPy;
+    player2.px = player2.origPx;
+    levelCleared = true;
+  }
+  if(levelCleared){
+    gameMenu.displayPopUp(level.timer.minutes(),level.timer.seconds());
   }
 }
 
@@ -314,6 +320,10 @@ void mouseClicked() {
     menu = false;
     levels = false;
   }
+   else if(gameMenu.levels.rectOver){
+    backToLevels();
+  }
+
 }
 
 // manage player movement, update sprites and exit level
