@@ -150,6 +150,11 @@ class Level {
           img = img.get(0,0,16,16);
           image(img, j*25, i*25, 25, 25);
         }
+        else if(map[i][j] == 2) {
+          img = loadImage("data/Textures-16.png");
+          img = img.get(256,144,16,16);
+          image(img, j*25, i*25, 25, 25);
+        }
       }
     }
     

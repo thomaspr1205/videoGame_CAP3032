@@ -6,7 +6,7 @@ class Player {
   //float xSpeed, gravity;
   //boolean grounded;
   //boolean left = false, right = false;
-  boolean moving, grounded;
+  boolean moving, grounded, dead;
   int keySet;
   Level level;
   CharacterSprite sprite;
@@ -23,9 +23,6 @@ class Player {
     ax = 0;
     ay = 0;
     keySet = playerKey;
-    //xSpeed = 9;
-    //gravity = 0.75;
-    //grounded = false;
     sound = new SoundFile(parent, "data/jump.wav");
   }
   
@@ -40,10 +37,6 @@ class Player {
   }
   
   boolean simulate(boolean left, boolean right, boolean moving) {
-    //if(up == true) {
-    //  vy -=10;
-    //  up = false;
-    //}
     float prevPx, prevPy;
     prevPx = px;
     prevPy = py;
@@ -80,6 +73,12 @@ class Player {
         ay=0;
         grounded = true;
     }
+    if(level.map[yblkBotLoc][xblkBotLoc] == 2 && prevPy < py || level.map[yblkBotLoc2][xblkBotLoc2] == 2 && prevPy < py) {
+        py=(yblkBotLoc)*25; 
+        vy=0; 
+        ay=0;
+        dead = true;
+    }
     
     // friction
     if(grounded == true && moving == false) {
@@ -100,6 +99,12 @@ class Player {
         vy=0; 
         ay=0;
     }
+    if(level.map[yblkTopLoc][xblkTopLoc] == 2 && prevPy > py || level.map[yblkTopLoc2][xblkTopLoc2] == 2 && prevPy > py) {
+        py=((yblkTopLoc + 1)*25)+40; 
+        vy=0; 
+        ay=0;
+        dead = true;
+    }
     
     // Left collision
     int xblkLeftLoc, yblkLeftLoc;
@@ -114,6 +119,12 @@ class Player {
         px=((xblkLeftLoc + 1)*25)+20; 
         vx=0; 
         ax=0;
+    }
+    if(level.map[yblkLeftLoc][xblkLeftLoc] == 2 && prevPx > px || level.map[yblkLeftLoc2][xblkLeftLoc2] == 2 && prevPx > px) {
+        px=((xblkLeftLoc + 1)*25)+20; 
+        vx=0; 
+        ax=0;
+        dead = true;
     }
     
     // Right collision
@@ -130,12 +141,18 @@ class Player {
         vx=0; 
         ax=0;
     }
+    if(level.map[yblkRightLoc][xblkRightLoc] == 2 && prevPx < px || level.map[yblkRightLoc2][xblkRightLoc2] == 2 && prevPx < px) {
+        px=((xblkRightLoc)*25)-20; 
+        vx=0; 
+        ax=0;
+        dead = true;
+    }
+    
     render(px, py);
     return grounded;
   }
   
   void render(float px, float py) {
-    //background(64);
     rectMode(CORNER);
     image(currentSprite, px-20, py-40,40,40);
     rectMode(CENTER);
