@@ -11,9 +11,11 @@ class Player {
   Level level;
   CharacterSprite sprite;
   PImage currentSprite;
+  SoundFile sound;
+
 
   
-  Player(int xPos, int yPos, int playerKey) {
+  Player(PApplet parent, int xPos, int yPos, int playerKey) {
     px = xPos;
     py = yPos;
     vx = 0;
@@ -24,6 +26,7 @@ class Player {
     //xSpeed = 9;
     //gravity = 0.75;
     //grounded = false;
+    sound = new SoundFile(parent, "data/jump.wav");
   }
   
   int getPlayerKey() {
@@ -32,6 +35,8 @@ class Player {
   
   void jump() {
     vy -=10;
+    sound.amp(1.0);
+    sound.play();
   }
   
   boolean simulate(boolean left, boolean right, boolean moving) {
