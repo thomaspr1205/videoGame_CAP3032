@@ -20,10 +20,10 @@ class Menu{
         lvl2 = new Button("2", 150, 150, 385, 255, 25, 50);
         lvl3 = new Button("3", 150, 150, 615, 255, 25, 50);
         lvl4 = new Button("4", 150, 150, 845, 255, 25, 50);
-        lvl5 = new Button("5", 150, 150, 155, 485, 25, 50);
-        lvl6 = new Button("6", 150, 150, 385, 485, 25, 50);
-        lvl7 = new Button("7", 150, 150, 615, 485, 25, 50);
-        lvl8 = new Button("8", 150, 150, 845, 485, 25, 50);  
+        lvl5 = new Button("", 150, 150, 155, 485, 25, 50);
+        lvl6 = new Button("", 150, 150, 385, 485, 25, 50);
+        lvl7 = new Button("", 150, 150, 615, 485, 25, 50);
+        lvl8 = new Button("", 150, 150, 845, 485, 25, 50);  
 
         red = new Button("", 150, 150, 155, 545, 25, 50);
         blue = new Button("", 150, 150, 385, 545 ,25, 50);
@@ -65,6 +65,12 @@ class Menu{
         lvl6.display();
         lvl7.display();
         lvl8.display();
+        PImage lock = loadImage("whiteLock.png");
+        //lock = lock.get(0,0, 50, 43);
+        image(lock, 130, 463, 50, 43);
+        image(lock, 360, 463, 50, 43);
+        image(lock, 590, 463, 50, 43);
+        image(lock, 820, 463, 50, 43);        
     }
     
     void displayCharacters() {

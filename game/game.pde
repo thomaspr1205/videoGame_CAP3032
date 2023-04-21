@@ -87,6 +87,10 @@ public void draw() {
       image(loadImage("lvl1.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl1);
+
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
      else if(lvl2Selected){
       if(loadlvl2 == false) {
@@ -99,6 +103,9 @@ public void draw() {
       showCharacters(); 
       checkLevelSuccess(lvl2);
 
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
      else if(lvl3Selected){
       if(loadlvl3 == false) {
@@ -111,7 +118,9 @@ public void draw() {
       image(loadImage("lvl3.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl3);
-
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
      else if(lvl4Selected){
       if(loadlvl4 == false) {
@@ -123,6 +132,9 @@ public void draw() {
       image(loadImage("lvl4.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl4);
+      if(player1.win == true && player2.win == true) {
+        
+      }
     }
   }
   

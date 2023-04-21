@@ -4,7 +4,7 @@ class Player {
   float px, py;
   float vx, vy;
   float ax, ay;
-  boolean moving, grounded, portal, prevPortal;
+  boolean moving, grounded, portal, prevPortal, win;
   int keySet;
   int savedTime, totalTime = 1000, timePassed;
   Level level;
@@ -13,6 +13,7 @@ class Player {
   SoundFile sound;
 
   Player(PApplet parent, int xPos, int yPos, int playerKey) {
+    win = false;
     origPx = xPos;
     origPy = yPos;
     px = xPos;
@@ -77,6 +78,7 @@ class Player {
         timePassed = millis() - savedTime;
         if(timePassed > totalTime) {
           println("inPortal");
+          win = true;
         }
       }
     }   
