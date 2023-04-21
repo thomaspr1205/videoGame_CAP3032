@@ -1,12 +1,13 @@
 
 class Player {
+  float origPx, origPy;
   float px, py;
   float vx, vy;
   float ax, ay;
   //float xSpeed, gravity;
   //boolean grounded;
   //boolean left = false, right = false;
-  boolean moving, grounded, dead;
+  boolean moving, grounded;
   int keySet;
   Level level;
   CharacterSprite sprite;
@@ -16,6 +17,8 @@ class Player {
 
   
   Player(PApplet parent, int xPos, int yPos, int playerKey) {
+    origPx = xPos;
+    origPy = yPos;
     px = xPos;
     py = yPos;
     vx = 0;
@@ -74,10 +77,8 @@ class Player {
         grounded = true;
     }
     if(level.map[yblkBotLoc][xblkBotLoc] == 2 && prevPy < py || level.map[yblkBotLoc2][xblkBotLoc2] == 2 && prevPy < py) {
-        py=(yblkBotLoc)*25; 
-        vy=0; 
-        ay=0;
-        dead = true;
+        px = origPx;
+        py = origPy;
     }
     
     // friction
@@ -100,10 +101,8 @@ class Player {
         ay=0;
     }
     if(level.map[yblkTopLoc][xblkTopLoc] == 2 && prevPy > py || level.map[yblkTopLoc2][xblkTopLoc2] == 2 && prevPy > py) {
-        py=((yblkTopLoc + 1)*25)+40; 
-        vy=0; 
-        ay=0;
-        dead = true;
+        px = origPx;
+        py = origPy;
     }
     
     // Left collision
@@ -121,10 +120,8 @@ class Player {
         ax=0;
     }
     if(level.map[yblkLeftLoc][xblkLeftLoc] == 2 && prevPx > px || level.map[yblkLeftLoc2][xblkLeftLoc2] == 2 && prevPx > px) {
-        px=((xblkLeftLoc + 1)*25)+20; 
-        vx=0; 
-        ax=0;
-        dead = true;
+        px = origPx;
+        py = origPy;
     }
     
     // Right collision
@@ -142,10 +139,8 @@ class Player {
         ax=0;
     }
     if(level.map[yblkRightLoc][xblkRightLoc] == 2 && prevPx < px || level.map[yblkRightLoc2][xblkRightLoc2] == 2 && prevPx < px) {
-        px=((xblkRightLoc)*25)-20; 
-        vx=0; 
-        ax=0;
-        dead = true;
+        px = origPx;
+        py = origPy;
     }
     
     render(px, py);
