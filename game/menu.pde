@@ -66,11 +66,17 @@ class Menu{
         lvl7.display();
         lvl8.display();
         PImage lock = loadImage("whiteLock.png");
-        //lock = lock.get(0,0, 50, 43);
         image(lock, 130, 463, 50, 43);
         image(lock, 360, 463, 50, 43);
         image(lock, 590, 463, 50, 43);
         image(lock, 820, 463, 50, 43);        
+    }
+    
+    void displayPopUp(int minutes, int seconds) {
+        rectMode(CORNER);
+        fill(255,100,100, 230);
+        rect(300,100,400,500, 25);
+        rectMode(CENTER);
     }
     
     void displayCharacters() {
