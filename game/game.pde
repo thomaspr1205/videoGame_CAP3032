@@ -321,6 +321,8 @@ void mouseClicked() {
     levels = false;
   }
    else if(gameMenu.levels.rectOver){
+    gameMenu.levels.rectOver = false;
+    levelCleared = false;
     backToLevels();
   }
 
