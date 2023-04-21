@@ -16,7 +16,7 @@ class Menu{
         charSel = new Button("Characters", 300, 80, 500, 420, 25, 50);
         controls = new Button("Controls", 300, 80, 500, 510, 25, 50);
         credits = new Button("Credits", 300, 80, 500, 600, 25, 50);
-        levels = new Button("Levels", 150, 50, 500, 400, 15, 30);
+        levels = new Button("Back To Levels", 300, 80, 500, 510, 25, 40);
 
         lvl1 = new Button("1", 150, 150, 155, 255, 25, 50);
         lvl2 = new Button("2", 150, 150, 385, 255, 25, 50);
@@ -76,16 +76,15 @@ class Menu{
     
     void displayPopUp(int minutes, int seconds) {
         rectMode(CORNER);
-        fill(150,40,40, 150);
+        fill(100);
         rect(300,100,400,500, 25);
         fill(255);
         textSize(50);
         text("Congratulations!",500,190);
         textSize(40);
-        text("Minutes: " + minutes, 500,250);
-        text("Seconds: " + seconds, 500,300);
-        levels.display();
+        text("Time: " + minutes + ":" + seconds, 500,300);
         rectMode(CENTER);
+        levels.display();
     }
     
     void displayCharacters() {
