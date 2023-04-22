@@ -4,6 +4,7 @@ class Animation {
   int imageCount;
   int frame, prevFrame;
   
+  // animation constructor creates an array of images
   Animation(String imagePrefix, int count) {
     imageCount = count;
     images = new PImage[imageCount];
@@ -14,6 +15,7 @@ class Animation {
     }
   }
 
+  // displays the array of images
   void display(float xPos, float yPos, int lag, int newX, int newY) {
     prevFrame+=1;
     if(prevFrame == imageCount * lag) {

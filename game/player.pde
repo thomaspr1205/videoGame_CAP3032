@@ -12,6 +12,7 @@ class Player {
   PImage currentSprite;
   SoundFile sound;
 
+  // player constructor that creates a player with the following parameters
   Player(PApplet parent, int xPos, int yPos, int playerKey) {
     win = false;
     origPx = xPos;
@@ -26,16 +27,19 @@ class Player {
     sound = new SoundFile(parent, "data/jump.wav");
   }
   
+  // used to set p1 to the arrow keys and p2 to the wad keys
   int getPlayerKey() {
     return keySet;
   }
   
+  // makes the character jump and makes a sound effect when they do
   void jump() {
     vy -=10;
     sound.amp(1.0);
     sound.play();
   }
   
+  // simulates all the physics
   boolean simulate(boolean left, boolean right, boolean moving) {
     float prevPx, prevPy;
     prevPx = px;
@@ -71,6 +75,7 @@ class Player {
        
     if(level.map[yTopLeft][xTopLeft] == 7 && level.map[yTopRight][xTopRight] == 8 && level.map[yBotLeft - 1][xBotLeft] == 9 && level.map[yBotRight - 1][xBotRight] == 10) {
       portal = true;
+      // timer to check that the character is in the portal for at least 1 second
       if(prevPortal == false) {
         savedTime = millis();
       }

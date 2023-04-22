@@ -7,6 +7,7 @@ class Menu{
     String character1, character2;
     Animation redIdle, blueIdle, greenIdle, yellowIdle;
     
+    // creates menu with teh following parameters and possible buttons
     Menu(PImage image, String name){
         backgroundImg = image;
         title = name;
@@ -20,8 +21,8 @@ class Menu{
 
         lvl1 = new Button("1", 150, 150, 155, 255, 25, 50);
         lvl2 = new Button("2", 150, 150, 385, 255, 25, 50);
-        lvl3 = new Button("3", 150, 150, 615, 255, 25, 50);
-        lvl4 = new Button("4", 150, 150, 845, 255, 25, 50);
+        lvl3 = new Button("", 150, 150, 615, 255, 25, 50);
+        lvl4 = new Button("", 150, 150, 845, 255, 25, 50);
         lvl5 = new Button("", 150, 150, 155, 485, 25, 50);
         lvl6 = new Button("", 150, 150, 385, 485, 25, 50);
         lvl7 = new Button("", 150, 150, 615, 485, 25, 50);
@@ -41,6 +42,7 @@ class Menu{
         yellowIdle = new Animation("dinoYRI", 4);
     }
 
+    // displays main menu
     void display(){
         image(backgroundImg,0,0);
         fill(0);
@@ -55,6 +57,7 @@ class Menu{
         credits.display();
     }
     
+    // displays levels menu
     void displayLevels() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
@@ -68,12 +71,15 @@ class Menu{
         lvl7.display();
         lvl8.display();
         PImage lock = loadImage("whiteLock.png");
+        image(lock, 590, 233, 50, 43);
+        image(lock, 820, 233, 50, 43);  
         image(lock, 130, 463, 50, 43);
         image(lock, 360, 463, 50, 43);
         image(lock, 590, 463, 50, 43);
         image(lock, 820, 463, 50, 43);        
     }
     
+    // displays pop up win window menu
     void displayPopUp(int minutes, int seconds) {
         rectMode(CORNER);
         fill(100);
@@ -87,6 +93,7 @@ class Menu{
         levels.display();
     }
     
+    // displays character selection menu
     void displayCharacters() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
@@ -147,6 +154,8 @@ class Menu{
           yellowIdle.display(730 - 64, 310 - 40, 5, 128, 136);
         }
     }   
+    
+    // displays controls menu
     void displayControls() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
@@ -171,6 +180,7 @@ class Menu{
         
     }
     
+    // displays credits menu
     void displayCredits() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
