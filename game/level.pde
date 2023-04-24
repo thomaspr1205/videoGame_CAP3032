@@ -135,12 +135,12 @@ class Level {
     else if(levelNum == 2) {
       map = lvl2;
     }
-    //else if(levelNum == 3) {
-    //  map = lvl3;
-    //}
-    //else if(levelNum == 4) {
-    //  map = lvl4;
-    //}
+    else if(levelNum == 3) {
+     map = lvl3;
+    }
+    else if(levelNum == 4) {
+     map = lvl4;
+    }
   }
 
   
