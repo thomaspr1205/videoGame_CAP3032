@@ -79,7 +79,7 @@ public void draw() {
     else if(lvl1Selected){
       if(loadlvl1 == false) {
         println("loading map 1");
-        levelSetUp(50,680,70,680, lvl1,color(233,121,123),0,0,16,16);
+        levelSetUp(50,680,950,680, lvl1,color(233,121,123),0,0,16,16);
         save("lvl1.jpg");
         loadlvl1 = true;
       }
@@ -91,7 +91,7 @@ public void draw() {
      else if(lvl2Selected){
       if(loadlvl2 == false) {
         print("loading map 2");
-        levelSetUp(50,680,620,680, lvl2,color(123),16,16,32,32);
+        levelSetUp(50,680,70,680, lvl2,color(221,180,123),16,16,16,16);
         save("lvl2.jpg");
         loadlvl2 = true;      
       }
@@ -102,7 +102,7 @@ public void draw() {
      else if(lvl3Selected){
       if(loadlvl3 == false) {
         print("loading map 3");
-        levelSetUp(50,680,70,680, lvl3,color(233,255,123),32,32,64,64);
+        levelSetUp(50,680,70,680, lvl3,color(233,142,80),0,16*30,16,16);
         save("lvl3.jpg");
         loadlvl3 = true;
       }
@@ -114,7 +114,7 @@ public void draw() {
      else if(lvl4Selected){
       if(loadlvl4 == false) {
         print("loading map 4");
-        levelSetUp(50,680,70,680, lvl4,color(123,123,123),32,32,32,32);
+        levelSetUp(50,680,620,680, lvl4,color(123,123,123),0,32,16,16);
         save("lvl4.jpg");
         loadlvl4 = true;
       }
@@ -145,8 +145,13 @@ void levelSetUp(int px1,
   player1.level = lvl;
   player2.level = lvl;
 
+  player1.origPx = px1;
+  player1.origPy = py1;
   player1.px = px1;
   player1.py = py1;
+
+  player2.origPx = px2;
+  player2.origPy = py2;
   player2.px = px2;
   player2.py = py2;
 
