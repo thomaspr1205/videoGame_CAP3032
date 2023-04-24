@@ -1,21 +1,14 @@
-
 import processing.sound.*;
 
 Menu gameMenu;
 
 boolean menu, levels, characters, controls, credits, P1, P2;
-boolean lvl1Selected,lvl2Selected,lvl3Selected,lvl4Selected;
+boolean lvl1Selected,lvl2Selected, lvl3Selected,lvl4Selected;
 
 Player player1, player2;
 CharacterSprite blue, green, red, yellow;
 
-Level lvl1,lvl2,lvl3,lvl4;
-float px = 200;
-float py = 300;
-float vx = 0;
-float vy = 0;
-float ax = 0;
-float ay = 0;
+Level lvl1,lvl2, lvl3,lvl4;
 int player = 0;
 
 boolean[] keys = {false, false, false, false, false, false};
@@ -58,7 +51,7 @@ void setup() {
 }
 
 public void draw() {
-
+  // Check to see which menu is loaded an display it
   // Menu
   if(menu){
     gameMenu.display();
@@ -80,11 +73,11 @@ public void draw() {
       if(loadlvl1 == false) {
         println("loading map 1");
         levelSetUp(50,680,950,680, lvl1,color(233,121,123),0,0,16,16);
-        save("lvl1.jpg");
+        save("data/lvl1.jpg");
         loadlvl1 = true;
       }
 
-      image(loadImage("lvl1.jpg"),0,0);
+      image(loadImage("data/lvl1.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl1);      
     }
@@ -92,10 +85,10 @@ public void draw() {
       if(loadlvl2 == false) {
         print("loading map 2");
         levelSetUp(50,680,70,680, lvl2,color(221,180,123),16,16,16,16);
-        save("lvl2.jpg");
+        save("data/lvl2.jpg");
         loadlvl2 = true;      
       }
-      image(loadImage("lvl2.jpg"),0,0);
+      image(loadImage("data/lvl2.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl2);
     }
@@ -103,11 +96,11 @@ public void draw() {
       if(loadlvl3 == false) {
         print("loading map 3");
         levelSetUp(50,680,70,680, lvl3,color(233,142,80),0,16*30,16,16);
-        save("lvl3.jpg");
+        save("data/lvl3.jpg");
         loadlvl3 = true;
       }
      
-      image(loadImage("lvl3.jpg"),0,0);
+      image(loadImage("data/lvl3.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl3);
     }
@@ -115,15 +108,14 @@ public void draw() {
       if(loadlvl4 == false) {
         print("loading map 4");
         levelSetUp(50,680,620,680, lvl4,color(123,123,123),0,32,16,16);
-        save("lvl4.jpg");
+        save("data/lvl4.jpg");
         loadlvl4 = true;
       }
-      image(loadImage("lvl4.jpg"),0,0);
+      image(loadImage("data/lvl4.jpg"),0,0);
       showCharacters(); 
       checkLevelSuccess(lvl4);
     }
   }
-  
 }
 
 // Loads level and position characters
@@ -227,6 +219,7 @@ void backToLevels(){
 void mouseClicked() {
 
   // ========== navigation controller =============
+  // checks which button is press and changes booleans to change the menu
   if(gameMenu.home.rectOver){
     print("home button selected\n");
     backToMenu();
@@ -257,6 +250,7 @@ void mouseClicked() {
   }
 
   //============= Character Selection ==============
+  // checks who is picking the character
   else if(gameMenu.P1Button.rectOver) {
     P1 = true;
     P2 = false;
@@ -267,6 +261,7 @@ void mouseClicked() {
     P2 = true;
     player = 2;
   }
+  // checks which character is chosen
   else if(gameMenu.red.rectOver){
     println("red character selected - player " + player);
     characterSelection(red);
@@ -289,6 +284,7 @@ void mouseClicked() {
   }
 
   // ============ Level Selection ================
+  // check which level is chosen
   else if(gameMenu.lvl1.rectOver){
     file.pause();
     levelSelection.play();
@@ -308,23 +304,24 @@ void mouseClicked() {
     levels = false;
   }
   else if(gameMenu.lvl3.rectOver){
-    file.pause();
-    levelSelection.play();
-    println("level 3 selected");
-    gameMenu.lvl3.rectOver = false;
-    lvl3Selected = true;
-    menu = false;
-    levels = false;
+   file.pause();
+   levelSelection.play();
+   println("level 3 selected");
+   gameMenu.lvl3.rectOver = false;
+   lvl3Selected = true;
+   menu = false;
+   levels = false;
   }
   else if(gameMenu.lvl4.rectOver){
-    file.pause();
-    levelSelection.play();
-    println("level 4 selected");
-    gameMenu.lvl4.rectOver = false;
-    lvl4Selected = true;
-    menu = false;
-    levels = false;
+   file.pause();
+   levelSelection.play();
+   println("level 4 selected");
+   gameMenu.lvl4.rectOver = false;
+   lvl4Selected = true;
+   menu = false;
+   levels = false;
   }
+  // checks if back to level menu button pressed in pop up win window
    else if(gameMenu.levels.rectOver){
     gameMenu.levels.rectOver = false;
     levelCleared = false;
@@ -404,7 +401,7 @@ void keyReleased(){
 
 // ======= Characters ============
 
-// lods files needed for sprite changing
+// loads files needed for sprite changing
 void loadSprites(){
 
  red = new CharacterSprite(new String[]{"data/dinoRL1.png",

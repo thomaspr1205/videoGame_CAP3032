@@ -12,6 +12,7 @@ class Button {
   boolean rectOver = false;
   String content;
 
+  // button constructor creates a button with the following parameters
   Button(String input, int sizeX, int sizeY, int posX, int posY, int radius, int textSz) {
     content = input;
     rectColor = color(255,100,100, 200);
@@ -25,6 +26,7 @@ class Button {
     rectMode(CENTER);
   }
 
+  // displays the button; highlights and outlines when mouse over
   void display() {
     update();
 
@@ -49,6 +51,7 @@ class Button {
     text(content, rectX, rectY +(rectTextSz*2)/6); // Font is around a 30 to 50 ratio pixels to font size
   }
 
+  // changes rectOver variable to true if mouse is over button
   void update() {
     if ( overRect(rectX, rectY, rectSizeX, rectSizeY) ) {
       rectOver = true;
@@ -56,6 +59,8 @@ class Button {
       rectOver = false;
     }
   }
+  
+  // checks if mouse is over
   boolean overRect(int x, int y, int width, int height) {
     if (mouseX >= x - width/2 && mouseX <= x + width/2 &&
       mouseY >= y - height/2 && mouseY <= y + height/2) {

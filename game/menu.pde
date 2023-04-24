@@ -7,6 +7,7 @@ class Menu{
     String character1, character2;
     Animation redIdle, blueIdle, greenIdle, yellowIdle;
     
+    // creates menu with teh following parameters and possible buttons
     Menu(PImage image, String name){
         backgroundImg = image;
         title = name;
@@ -20,8 +21,8 @@ class Menu{
 
         lvl1 = new Button("1", 150, 150, 155, 255, 25, 50);
         lvl2 = new Button("2", 150, 150, 385, 255, 25, 50);
-        lvl3 = new Button("3", 150, 150, 615, 255, 25, 50);
-        lvl4 = new Button("4", 150, 150, 845, 255, 25, 50);
+        lvl3 = new Button("", 150, 150, 615, 255, 25, 50);
+        lvl4 = new Button("", 150, 150, 845, 255, 25, 50);
         lvl5 = new Button("", 150, 150, 155, 485, 25, 50);
         lvl6 = new Button("", 150, 150, 385, 485, 25, 50);
         lvl7 = new Button("", 150, 150, 615, 485, 25, 50);
@@ -41,6 +42,7 @@ class Menu{
         yellowIdle = new Animation("dinoYRI", 4);
     }
 
+    // displays main menu
     void display(){
         image(backgroundImg,0,0);
         fill(0);
@@ -55,6 +57,7 @@ class Menu{
         credits.display();
     }
     
+    // displays levels menu
     void displayLevels() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
@@ -68,12 +71,15 @@ class Menu{
         lvl7.display();
         lvl8.display();
         PImage lock = loadImage("whiteLock.png");
+        image(lock, 590, 233, 50, 43);
+        image(lock, 820, 233, 50, 43);  
         image(lock, 130, 463, 50, 43);
         image(lock, 360, 463, 50, 43);
         image(lock, 590, 463, 50, 43);
         image(lock, 820, 463, 50, 43);        
     }
     
+    // displays pop up win window menu
     void displayPopUp(int minutes, int seconds) {
         rectMode(CORNER);
         fill(100);
@@ -87,6 +93,7 @@ class Menu{
         levels.display();
     }
     
+    // displays character selection menu
     void displayCharacters() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
@@ -147,6 +154,8 @@ class Menu{
           yellowIdle.display(730 - 64, 310 - 40, 5, 128, 136);
         }
     }   
+    
+    // displays controls menu
     void displayControls() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
@@ -171,23 +180,40 @@ class Menu{
         
     }
     
+    // displays credits menu
     void displayCredits() {
         image(backgroundImg,0,0);
         textAlign(CENTER);
         home.display();
         fill(255,100,100, 150);
-        rect(500,400,840,415, 25);
+        rect(500,405,840,530, 25);
         fill(255);
-        text("CREATED BY:", 500,230);
+        text("CREATED BY:", 500,185);
         textSize(20);
-        text("AARON SONG & THOMAS PENA", 500, 260);
+        text("AARON SONG & THOMAS PENA", 500, 210);
         textSize(30);
-        text("MUSIC BY:",500,300);
+        text("MUSIC BY:",500,250);
         textSize(20);
-        text("ABSTRACTION @ http://www.abstractionmusic.com/", 500, 330);
+        text("ABSTRACTION @ http://www.abstractionmusic.com/", 500, 275);
         textSize(30);
-        text("CHARACTER ART BY:",500,370);
+        text("CHARACTER ART BY:",500,315);
         textSize(20);
-        text("ARKS @ arks.digital", 500, 400);
+        text("ARKS @ arks.digital", 500, 340);
+        textSize(30);
+        text("TEXTURES BY:",500,380);
+        textSize(20);
+        text("PiiiXL @ https://piiixl.itch.io/textures", 500, 405);
+        text("Omniclause @ https://omniclause.itch.io/spikes", 500, 430);
+        textSize(30);
+        text("SOUND EFFECTS BY:",500,470);
+        textSize(20);
+        text("dave.des @ https://pixabay.com/sound-effects/fast-simple-chop-5-6270/", 500, 495);
+        text("NicknameLarry @ https://pixabay.com/sound-effects/monster-roar-6985/", 500, 520);
+        textSize(30);
+        text("OTHER ICONS BY:",500,560);
+        textSize(20);
+        text("7da631 @ http://pixelartmaker.com/art/1f923d1c3a1f8b0", 500, 585);
+        text("75a299 @ http://pixelartmaker.com/art/684798e0915e233", 500, 610);
+        text("https://tinyurl.com/yx4epcny", 500, 635);
     }
 }
