@@ -3,20 +3,20 @@ import processing.sound.*;
 Menu gameMenu;
 
 boolean menu, levels, characters, controls, credits, P1, P2;
-boolean lvl1Selected,lvl2Selected; //lvl3Selected,lvl4Selected;
+boolean lvl1Selected,lvl2Selected, lvl3Selected,lvl4Selected;
 
 Player player1, player2;
 CharacterSprite blue, green, red, yellow;
 
-Level lvl1,lvl2; //lvl3,lvl4;
+Level lvl1,lvl2, lvl3,lvl4;
 int player = 0;
 
 boolean[] keys = {false, false, false, false, false, false};
 boolean moving1 = false, moving2 = false;
 boolean loadlvl1 = false;
 boolean loadlvl2 = false;
-//boolean loadlvl3 = false;
-//boolean loadlvl4 = false;
+boolean loadlvl3 = false;
+boolean loadlvl4 = false;
 boolean levelCleared = false;
 boolean jumping1 = false, jumping2 = false;
 boolean grounded1 = false, grounded2 = false;
@@ -72,7 +72,7 @@ public void draw() {
     else if(lvl1Selected){
       if(loadlvl1 == false) {
         println("loading map 1");
-        levelSetUp(50,680,70,680, lvl1,color(233,121,123),0,0,16,16);
+        levelSetUp(50,680,950,680, lvl1,color(233,121,123),0,0,16,16);
         save("data/lvl1.jpg");
         loadlvl1 = true;
       }
@@ -84,7 +84,7 @@ public void draw() {
      else if(lvl2Selected){
       if(loadlvl2 == false) {
         print("loading map 2");
-        levelSetUp(50,680,620,680, lvl2,color(123),16,16,32,32);
+        levelSetUp(50,680,70,680, lvl2,color(221,180,123),16,16,16,16);
         save("data/lvl2.jpg");
         loadlvl2 = true;      
       }
@@ -92,29 +92,29 @@ public void draw() {
       showCharacters(); 
       checkLevelSuccess(lvl2);
     }
-    // else if(lvl3Selected){
-    //  if(loadlvl3 == false) {
-    //    print("loading map 3");
-    //    levelSetUp(50,680,70,680, lvl3,color(233,255,123),32,32,64,64);
-    //    save("lvl3.jpg");
-    //    loadlvl3 = true;
-    //  }
+     else if(lvl3Selected){
+      if(loadlvl3 == false) {
+        print("loading map 3");
+        levelSetUp(50,680,70,680, lvl3,color(233,142,80),0,16*30,16,16);
+        save("data/lvl3.jpg");
+        loadlvl3 = true;
+      }
      
-    //  image(loadImage("lvl3.jpg"),0,0);
-    //  showCharacters(); 
-    //  checkLevelSuccess(lvl3);
-    //}
-    // else if(lvl4Selected){
-    //  if(loadlvl4 == false) {
-    //    print("loading map 4");
-    //    levelSetUp(50,680,70,680, lvl4,color(123,123,123),32,32,32,32);
-    //    save("lvl4.jpg");
-    //    loadlvl4 = true;
-    //  }
-    //  image(loadImage("lvl4.jpg"),0,0);
-    //  showCharacters(); 
-    //  checkLevelSuccess(lvl4);
-    //}
+      image(loadImage("data/lvl3.jpg"),0,0);
+      showCharacters(); 
+      checkLevelSuccess(lvl3);
+    }
+     else if(lvl4Selected){
+      if(loadlvl4 == false) {
+        print("loading map 4");
+        levelSetUp(50,680,620,680, lvl4,color(123,123,123),0,32,16,16);
+        save("data/lvl4.jpg");
+        loadlvl4 = true;
+      }
+      image(loadImage("data/lvl4.jpg"),0,0);
+      showCharacters(); 
+      checkLevelSuccess(lvl4);
+    }
   }
 }
 
@@ -137,8 +137,13 @@ void levelSetUp(int px1,
   player1.level = lvl;
   player2.level = lvl;
 
+  player1.origPx = px1;
+  player1.origPy = py1;
   player1.px = px1;
   player1.py = py1;
+
+  player2.origPx = px2;
+  player2.origPy = py2;
   player2.px = px2;
   player2.py = py2;
 
@@ -191,12 +196,12 @@ void backToMenu(){
   gameMenu.home.rectOver = false;
   lvl1Selected = false;
   lvl2Selected = false;
-  //lvl3Selected = false;
-  //lvl4Selected = false;
+  lvl3Selected = false;
+  lvl4Selected = false;
   loadlvl1 = false;
   loadlvl2 = false;
-  //loadlvl3 = false;
-  //loadlvl4 = false;
+  loadlvl3 = false;
+  loadlvl4 = false;
 }
 
 // returns to levels screen
@@ -206,8 +211,8 @@ void backToLevels(){
   gameMenu.play.rectOver = false;
   lvl1Selected = false;
   lvl2Selected = false;
-  //lvl3Selected = false;
-  //lvl4Selected = false;
+  lvl3Selected = false;
+  lvl4Selected = false;
 }
 
 // ===== I/O controllers =======
@@ -298,24 +303,24 @@ void mouseClicked() {
     menu = false;
     levels = false;
   }
-  //else if(gameMenu.lvl3.rectOver){
-  //  file.pause();
-  //  levelSelection.play();
-  //  println("level 3 selected");
-  //  gameMenu.lvl3.rectOver = false;
-  //  lvl3Selected = true;
-  //  menu = false;
-  //  levels = false;
-  //}
-  //else if(gameMenu.lvl4.rectOver){
-  //  file.pause();
-  //  levelSelection.play();
-  //  println("level 4 selected");
-  //  gameMenu.lvl4.rectOver = false;
-  //  lvl4Selected = true;
-  //  menu = false;
-  //  levels = false;
-  //}
+  else if(gameMenu.lvl3.rectOver){
+   file.pause();
+   levelSelection.play();
+   println("level 3 selected");
+   gameMenu.lvl3.rectOver = false;
+   lvl3Selected = true;
+   menu = false;
+   levels = false;
+  }
+  else if(gameMenu.lvl4.rectOver){
+   file.pause();
+   levelSelection.play();
+   println("level 4 selected");
+   gameMenu.lvl4.rectOver = false;
+   lvl4Selected = true;
+   menu = false;
+   levels = false;
+  }
   // checks if back to level menu button pressed in pop up win window
    else if(gameMenu.levels.rectOver){
     gameMenu.levels.rectOver = false;
@@ -493,8 +498,8 @@ void characterSelection(CharacterSprite sprite){
 void createLevels(){
   lvl1 = new Level(1);
   lvl2 = new Level(2);
-  //lvl3 = new Level(3);
-  //lvl4 = new Level(4);
+  lvl3 = new Level(3);
+  lvl4 = new Level(4);
 }
 
 // =========  Sounds =========
